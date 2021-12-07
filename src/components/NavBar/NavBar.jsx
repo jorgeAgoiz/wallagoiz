@@ -17,7 +17,9 @@ const settings = ['Perfil', 'Cuenta', 'Tus productos', 'Cerrar Sesión']
 
 const styleProps = {
   gridColumn: '1 / 7',
-  gridRow: '1 / 2'
+  gridRow: '1 / 2',
+  backgroundColor: '#79955a',
+  color: 'black'
 }
 
 const NavBar = () => {
@@ -29,6 +31,7 @@ const NavBar = () => {
   }
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget)
+    console.log('ja ja ja')
   }
 
   const handleCloseNavMenu = () => {
@@ -111,7 +114,7 @@ const NavBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Jorge Agoiz" src="/https://i.pravatar.cc/80?img=12" />
               </IconButton>
             </Tooltip>
             <Menu
