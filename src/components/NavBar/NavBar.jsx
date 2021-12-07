@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -12,12 +12,17 @@ import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 
-const pages = ['Products', 'Pricing', 'Blog']
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+const pages = ['Busqueda', 'Favoritos', 'Subelo', 'Mensajes']
+const settings = ['Perfil', 'Cuenta', 'Tus productos', 'Cerrar Sesión']
+
+const styleProps = {
+  gridColumn: '1 / 8',
+  gridRow: '1 / 2'
+}
 
 const NavBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null)
-  const [anchorElUser, setAnchorElUser] = React.useState(null)
+  const [anchorElNav, setAnchorElNav] = useState(null)
+  const [anchorElUser, setAnchorElUser] = useState(null)
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
@@ -35,7 +40,7 @@ const NavBar = () => {
   }
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={styleProps} >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -44,7 +49,7 @@ const NavBar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            Wallagoiz
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
