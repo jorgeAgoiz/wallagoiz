@@ -1,19 +1,33 @@
 import React from 'react'
 import { Box } from '@mui/material'
+import PreviewCard from '../PreviewCard/PreviewCard'
 
 const styleProps = {
-  border: '3px solid black',
-  backgroundColor: 'white',
+  backgroundColor: 'transparent',
   gridColumn: '1 / 7',
-  gridRow: '4 / 5'
-
+  display: 'grid',
+  gridAutoRows: '21rem',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(15rem, 1fr))',
+  gap: '1rem',
+  padding: '1rem'
 }
 
 const PreviewList = () => {
   return (
-        <Box sx={styleProps}>
-            Hola que tal
-        </Box>
+    <Box sx={styleProps}>
+      <PreviewCard />
+      <PreviewCard />
+      <PreviewCard />
+      <PreviewCard />
+      <PreviewCard />
+      <PreviewCard />
+      <PreviewCard />
+      <PreviewCard />
+      <PreviewCard />
+      <PreviewCard />
+      <PreviewCard />
+      <PreviewCard />
+    </Box>
   )
 }
 
