@@ -6,12 +6,7 @@ import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 
-/* const styleProps = {
-  maxWidth: 345,
-  gridColumn: '2 / 4',
-  gridRow: '3 / 4'
-}
- */
+// eslint-disable-next-line react/prop-types
 const PreviewCard = ({ styleProps }) => {
   return (
     <Card sx={styleProps}>

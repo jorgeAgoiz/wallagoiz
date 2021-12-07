@@ -16,7 +16,7 @@ const pages = ['Busqueda', 'Favoritos', 'Subelo', 'Mensajes']
 const settings = ['Perfil', 'Cuenta', 'Tus productos', 'Cerrar Sesión']
 
 const styleProps = {
-  gridColumn: '1 / 8',
+  gridColumn: '1 / 7',
   gridRow: '1 / 2'
 }
 
