@@ -5,11 +5,7 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-
-const styleProps = {
-  border: '1px solid black',
-  boxShadow: 4
-}
+import { styleProps } from './styles'
 
 const PreviewCard = () => {
   return (

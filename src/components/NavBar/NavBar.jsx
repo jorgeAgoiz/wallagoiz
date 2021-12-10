@@ -11,35 +11,54 @@ import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
+import { styleProps } from './styles'
 
 const pages = ['Favoritos', 'Subelo', 'Mensajes']
 const settings = ['Perfil', 'Cuenta', 'Tus productos', 'Cerrar Sesión']
-
-const styleProps = {
-  gridColumn: '1 / 7',
-  gridRow: '1 / 2',
-  backgroundColor: '#79955a',
-  color: 'black'
-}
+const signIn = ['Iniciar sesión', 'Registrarse']
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
+  const [logged, setLogged] = useState(true)/* Simulamos un estado de autenticacion */
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
   }
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget)
-    console.log('ja ja ja')
+    console.log(event.currentTarget)
   }
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (event) => {
     setAnchorElNav(null)
+    // Aqui controlamos la autenticación de manera provisional
+    const textOption = event.target.innerText
+    if (textOption === signIn[0]) {
+      setLogged(true)
+    }
+    if (textOption === settings[3]) {
+      setLogged(false)
+    }
   }
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
+  }
+
+  const userLogged = () => {
+    return settings.map((setting) => (
+      <MenuItem key={setting} onClick={handleCloseNavMenu}>
+        <Typography textAlign='center'>{setting}</Typography>
+      </MenuItem>
+    ))
+  }
+  const userNoLogged = () => {
+    return signIn.map((signInValue) => (
+      <MenuItem key={signInValue} onClick={handleCloseNavMenu}>
+        <Typography textAlign='center'>{signInValue}</Typography>
+      </MenuItem>
+    ))
   }
 
   return (
@@ -116,7 +135,7 @@ const NavBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt='Jorge Agoiz' src='/https://i.pravatar.cc/80?img=12' />
+                <Avatar alt='V' src='https://i.pravatar.cc/150?img=44' />
               </IconButton>
             </Tooltip>
             <Menu
@@ -135,11 +154,7 @@ const NavBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center'>{setting}</Typography>
-                </MenuItem>
-              ))}
+              {logged ? userLogged() : userNoLogged()}
             </Menu>
           </Box>
         </Toolbar>
@@ -148,3 +163,5 @@ const NavBar = () => {
   )
 }
 export default NavBar
+
+/* Estoy intentando comprender el componente */

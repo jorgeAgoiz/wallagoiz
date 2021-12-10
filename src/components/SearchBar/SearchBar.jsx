@@ -2,29 +2,13 @@ import React, { useState } from 'react'
 import InputBase from '@mui/material/InputBase'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-
-const stylePropsBox = {
-  gridColumn: '2 / 6',
-  backgroundColor: '#d0e7b7',
-  boxShadow: 4,
-  borderRadius: 3,
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  padding: 0.8,
-  width: '100%'
+import {
+  stylePropsBox,
+  stylePropsButton,
+  stylePropsInput,
+  stylePropsInputRoot
 }
-const stylePropsInputRoot = {
-  width: '50%'
-}
-const stylePropsInput = {
-  placeholder: 'Buscar...',
-  type: 'text',
-  name: 'search'
-}
-const stylePropsButton = {
-  backgroundColor: '#79955a'
-}
+  from './styles'
 
 const SearchBar = () => {
   const [search, setSearch] = useState(null)
