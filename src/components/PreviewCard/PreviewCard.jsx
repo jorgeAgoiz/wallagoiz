@@ -5,9 +5,14 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import { styleProps } from './styles'
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import { styleProps, styleCardActions } from './styles'
 
 const PreviewCard = () => {
+  const logged = true// En función del loggeo deberemos desactivar la opcion marcar favorito
+  const favorite = false// En función de si es favorito para el usuario
+
   return (
     <Card sx={styleProps}>
       <CardMedia
@@ -24,9 +29,15 @@ const PreviewCard = () => {
           43 Euros
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions sx={styleCardActions}>
         <Button size='small'>Detalles</Button>
-        <Button size='small'>Favoritos</Button>
+        <Button size='small' disabled={!!logged}>
+          {
+            favorite
+              ? <FavoriteIcon />
+              : <FavoriteBorderIcon />
+          }
+        </Button>
       </CardActions>
     </Card>
   )
