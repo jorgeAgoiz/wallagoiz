@@ -5,22 +5,20 @@ import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
-import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
+import EnhancedEncryptionRoundedIcon from '@mui/icons-material/EnhancedEncryptionRounded'
+import NavBarPagesIcon from '../NavBarPagesIcon/NavBarPagesIcon'
+import NavBarPagesExpand from '../NavBarPagesExpand/NavBarPagesExpand'
 import { styleProps } from './styles'
-
-const pages = ['Favoritos', 'Subelo', 'Mensajes']
-const settings = ['Perfil', 'Cuenta', 'Tus productos', 'Cerrar Sesión']
-const signIn = ['Iniciar sesión', 'Registrarse']
+import { avatarOne, settings, signIn } from '../../constants/index'
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
-  const [logged, setLogged] = useState(true)/* Simulamos un estado de autenticacion */
+  const [logged, setLogged] = useState(false)/* Simulamos un estado de autenticacion */
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
@@ -29,7 +27,6 @@ const NavBar = () => {
     setAnchorElUser(event.currentTarget)
     console.log(event.currentTarget)
   }
-
   const handleCloseNavMenu = (event) => {
     setAnchorElNav(null)
     // Aqui controlamos la autenticación de manera provisional
@@ -41,11 +38,12 @@ const NavBar = () => {
       setLogged(false)
     }
   }
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
 
+  /* En caso de estar autenticado mostramos unas opciones en el menu desplegable, de lo contrario
+  otras diferentes */
   const userLogged = () => {
     return settings.map((setting) => (
       <MenuItem key={setting} onClick={handleCloseNavMenu}>
@@ -54,9 +52,9 @@ const NavBar = () => {
     ))
   }
   const userNoLogged = () => {
-    return signIn.map((signInValue) => (
-      <MenuItem key={signInValue} onClick={handleCloseNavMenu}>
-        <Typography textAlign='center'>{signInValue}</Typography>
+    return signIn.map((signValue) => (
+      <MenuItem key={signValue} onClick={handleCloseNavMenu}>
+        <Typography textAlign='center'>{signValue}</Typography>
       </MenuItem>
     ))
   }
@@ -73,46 +71,16 @@ const NavBar = () => {
           >
             Wallagoiz
           </Typography>
-          <Box sx={{
-            flexGrow: 1,
-            display: { xs: 'flex', md: 'none' }
-          }}
-          >
-            <IconButton
-              size='large'
-              aria-label='account of current user'
-              aria-controls='menu-appbar'
-              aria-haspopup='true'
-              onClick={handleOpenNavMenu}
-              color='inherit'
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id='menu-appbar'
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left'
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left'
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' }
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center'>{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          {/* Si esta autenticado se muestra el menu de icono en pantalla pequeña, de lo contrario nada */}
+          {
+          logged
+            ? <NavBarPagesIcon
+                handleCloseNavMenu={handleCloseNavMenu}
+                handleOpenNavMenu={handleOpenNavMenu}
+                anchorElNav={anchorElNav}
+              />
+            : null
+          }
           <Typography
             variant='h6'
             noWrap
@@ -121,21 +89,21 @@ const NavBar = () => {
           >
             Wallagoiz
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
+          {/* Si esta autenticado se muestran los botones en el header, de lo contario nada */}
+          {
+            logged
+              ? <NavBarPagesExpand handleCloseNavMenu={handleCloseNavMenu} />
+              : <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }} />
+          }
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title='Open settings'>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt='V' src='https://i.pravatar.cc/150?img=44' />
+                {/* Si esta autenticado se muestra el avatar, de lo contario un Icon */}
+                {
+                logged
+                  ? <Avatar alt='V' src={avatarOne} />
+                  : <EnhancedEncryptionRoundedIcon fontSize='large' />
+                }
               </IconButton>
             </Tooltip>
             <Menu
@@ -163,5 +131,3 @@ const NavBar = () => {
   )
 }
 export default NavBar
-
-/* Estoy intentando comprender el componente */
