@@ -16,3 +16,6 @@ function App () {
 }
 
 export default App
+
+/* Aqui quizá tanto el componente searchbar como previewlist meterlo en otro componente aparte
+envuelto en un Fragment */

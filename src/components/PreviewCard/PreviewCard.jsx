@@ -31,7 +31,7 @@ const PreviewCard = () => {
       </CardContent>
       <CardActions sx={styleCardActions}>
         <Button size='small'>Detalles</Button>
-        <Button size='small' disabled={!!logged}>
+        <Button size='small' disabled={logged}>
           {
             favorite
               ? <FavoriteIcon />
