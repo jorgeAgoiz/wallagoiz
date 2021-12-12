@@ -2,15 +2,26 @@ import React from 'react'
 import { Container } from '@mui/material'
 import NavBar from '../NavBar/NavBar'
 import SearchBar from '../SearchBar/SearchBar'
-import PreviewList from '../PreviewList/PreviewList'
+import Home from '../../pages/Home'
+import SignUp from '../../pages/SignUp'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from 'react-router-dom'
 import { bgColor } from './styles'
 
 function App () {
   return (
     <Container sx={bgColor}>
-      <NavBar />
-      <SearchBar />
-      <PreviewList />
+      <Router>
+        <NavBar />
+        <SearchBar />
+        <Routes>
+          <Route exact path='/' element={<Home />} />
+          <Route exact path='/signup' element={<SignUp />} />
+        </Routes>
+      </Router>
     </Container>
   )
 }

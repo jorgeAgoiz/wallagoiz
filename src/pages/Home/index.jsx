@@ -1,9 +1,9 @@
 import React from 'react'
 import { Box } from '@mui/material'
-import PreviewCard from '../PreviewCard/PreviewCard'
+import PreviewCard from '../../components/PreviewCard/PreviewCard'
 import { styleProps } from './styles'
 
-const PreviewList = () => {
+const Home = () => {
   return (
     <Box sx={styleProps}>
       <PreviewCard />
@@ -22,4 +22,4 @@ const PreviewList = () => {
   )
 }
 
-export default PreviewList
+export default Home

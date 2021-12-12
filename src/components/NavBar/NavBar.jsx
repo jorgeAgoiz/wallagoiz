@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -19,6 +20,7 @@ const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
   const [logged, setLogged] = useState(false)/* Simulamos un estado de autenticacion */
+  const navigate = useNavigate()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
@@ -36,6 +38,9 @@ const NavBar = () => {
     }
     if (textOption === settings[3]) {
       setLogged(false)
+    }
+    if (textOption === signIn[1]) {
+      return navigate('/signup')
     }
   }
   const handleCloseUserMenu = () => {
