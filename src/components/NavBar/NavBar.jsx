@@ -36,6 +36,7 @@ const NavBar = () => {
     const textOption = event.target.innerText
     if (textOption === signIn[0]) {
       setLogged(true)
+      return navigate('/signin')
     }
     if (textOption === settings[3]) {
       setLogged(false)
@@ -97,7 +98,7 @@ const NavBar = () => {
               component='div'
               sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
             >
-              Wallagoiz
+              <Link to='/' style={stylePropsLink}>Wallagoiz</Link>
             </Typography>
             {/* Si esta autenticado se muestran los botones en el header, de lo contario nada */}
             {

@@ -39,14 +39,10 @@ const SignUpForm = () => {
         }}
       >
         <Form style={styleProps}>
-          <Typography variant='h4' marginBottom='1rem'>Registrarse</Typography>
-          {/* <Typography variant='subtitle1'>Nombre</Typography> */}
+          <Typography variant='h5' marginBottom='1rem'>Registrarse</Typography>
           <TextfieldWrapper name='name' label='Nombre' />
-          {/* <Typography variant='subtitle1'>Email</Typography> */}
           <TextfieldWrapper name='email' label='Email' />
-          {/* <Typography variant='subtitle1'>Contraseña</Typography> */}
           <TextfieldWrapper name='password' label='Contraseña' />
-          {/* <Typography variant='subtitle1'>Confirmar contraseña</Typography> */}
           <TextfieldWrapper name='confirmPassword' label='Confirmar contraseña' />
           <Button type='submit' variant='contained' sx={stylePropsButton} color='success' endIcon={<SendIcon />}>Enviar</Button>
         </Form>
@@ -57,4 +53,3 @@ const SignUpForm = () => {
 }
 
 export default SignUpForm
-/* Lo dejo aquí, pensar si dejamos las tipografias como etiquetas y como manejamos los padding y los margin */

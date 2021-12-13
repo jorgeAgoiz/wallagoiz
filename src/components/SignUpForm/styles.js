@@ -3,11 +3,9 @@ export const styleProps = {
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  gap: 4,
+  gap: '0.8rem',
   color: 'black',
-  backgroundColor: '#f3f6cf',
-  border: '1px solid black',
-  padding: '1rem',
+  padding: '0.4rem',
   width: '100%'
 }
 

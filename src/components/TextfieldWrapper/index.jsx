@@ -1,6 +1,7 @@
 import { TextField } from '@mui/material'
 import { useField } from 'formik'
 import React from 'react'
+import { styleProps } from './styles'
 
 const TextfieldWrapper = ({ name, label, ...otherProps }) => {
   const [field, meta] = useField(name)
@@ -10,7 +11,8 @@ const TextfieldWrapper = ({ name, label, ...otherProps }) => {
     label: label,
     variant: 'outlined',
     ...otherProps,
-    ...field
+    ...field,
+    sx: styleProps
   }
   if (meta && meta.touched && meta.error) {
     configTextField.error = true
