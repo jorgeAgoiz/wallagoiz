@@ -3,10 +3,14 @@ export const styleProps = {
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  gap: 2,
+  gap: 4,
   color: 'black',
   backgroundColor: '#f3f6cf',
-  boxShadow: 5,
-  p: 1,
+  border: '1px solid black',
+  padding: '1rem',
   width: '100%'
+}
+
+export const stylePropsButton = {
+  marginTop: '1.4rem'
 }

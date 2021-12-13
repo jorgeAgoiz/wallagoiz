@@ -24,7 +24,7 @@ const SearchBar = () => {
   }
 
   return (
-    <Grid item xs={12} md={9} lg={6}>
+    <Grid item xs={12} sm={11} md={9} lg={7}>
       <Box sx={stylePropsBox} component='form' name='search-form' onSubmit={onHandleSubmit}>
         <InputBase sx={stylePropsInputRoot} inputProps={stylePropsInput} onChange={onHandleChange} />
         <Button variant='contained' size='small' type='submit' sx={stylePropsButton}>

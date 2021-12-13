@@ -2,12 +2,12 @@ import { TextField } from '@mui/material'
 import { useField } from 'formik'
 import React from 'react'
 
-const TextfieldWrapper = ({ name, ...otherProps }) => {
+const TextfieldWrapper = ({ name, label, ...otherProps }) => {
   const [field, meta] = useField(name)
 
   const configTextField = {
     id: 'outlined-basic',
-    label: 'Outlined',
+    label: label,
     variant: 'outlined',
     ...otherProps,
     ...field
@@ -16,7 +16,6 @@ const TextfieldWrapper = ({ name, ...otherProps }) => {
     configTextField.error = true
     configTextField.helperText = meta.error
   }
-  console.log(meta)
 
   return (
     <>

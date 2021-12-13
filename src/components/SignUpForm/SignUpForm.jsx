@@ -1,49 +1,54 @@
 /* import { Box } from '@mui/material' */
 import React from 'react'
 import * as Yup from 'yup'
-import { styleProps } from './styles'
+import { styleProps, stylePropsButton } from './styles'
 import { Formik, Form } from 'formik'
-import { Typography } from '@mui/material'
+import { Button, Typography } from '@mui/material'
+import SendIcon from '@mui/icons-material/Send'
 import TextfieldWrapper from '../TextfieldWrapper'
+import { INITIAL_FORM_STATE } from '../../constants'
 
-const INITIAL_FORM_STATE = {
-  name: '',
-  email: '',
-  password: '',
-  confirmPassword: ''
-}
+// Validation ****************
 const FORM_VALIDATION = Yup.object().shape({
   name: Yup.string()
     .required('Required')
     .min(3, 'Introduce un nombre válido.'),
   email: Yup.string()
     .required()
-    .email('Enter a valid email.'),
+    .email('Introduce un email válido.'),
   password: Yup.string()
-    .required('Required'),
+    .required('Requerido.'),
   confirmPassword: Yup.string()
-    .required('Required')
+    .required('Requerido.')
 })
-/* Continuamos aqui ajustando la validación y estilando la grid
-de nuestro formulario. */
+// Validation ***************
+
 const SignUpForm = () => {
   return (
     <>
       <Formik
         initialValues={{ ...INITIAL_FORM_STATE }}
         validationSchema={FORM_VALIDATION}
-        onSubmit={values => console.log(values)}
+        onSubmit={(values, { setFieldError }) => {
+          if (values.password !== values.confirmPassword) {
+            return setFieldError('confirmPassword', 'Las contraseñas deben coincidir.')
+          }
+          console.log(values)
+          /* hariamos esta función async, comparariamos los passwords
+          y si todo esta correcto mandariamos a la api los datos */
+        }}
       >
         <Form style={styleProps}>
-          <Typography variant='h2'>Registrarse</Typography>
-          <Typography variant='subtitle1'>Nombre</Typography>
-          <TextfieldWrapper />
-          <Typography variant='h5'>Email</Typography>
-          <TextfieldWrapper />
-          <Typography variant='h5'>Contraseña</Typography>
-          <TextfieldWrapper />
-          <Typography variant='h5'>Confirmar contraseña</Typography>
-          <TextfieldWrapper />
+          <Typography variant='h4' marginBottom='1rem'>Registrarse</Typography>
+          {/* <Typography variant='subtitle1'>Nombre</Typography> */}
+          <TextfieldWrapper name='name' label='Nombre' />
+          {/* <Typography variant='subtitle1'>Email</Typography> */}
+          <TextfieldWrapper name='email' label='Email' />
+          {/* <Typography variant='subtitle1'>Contraseña</Typography> */}
+          <TextfieldWrapper name='password' label='Contraseña' />
+          {/* <Typography variant='subtitle1'>Confirmar contraseña</Typography> */}
+          <TextfieldWrapper name='confirmPassword' label='Confirmar contraseña' />
+          <Button type='submit' variant='contained' sx={stylePropsButton} color='success' endIcon={<SendIcon />}>Enviar</Button>
         </Form>
       </Formik>
     </>
@@ -52,4 +57,4 @@ const SignUpForm = () => {
 }
 
 export default SignUpForm
-/* Mirar la mejor manera para estilar la grid del formulario */
+/* Lo dejo aquí, pensar si dejamos las tipografias como etiquetas y como manejamos los padding y los margin */
