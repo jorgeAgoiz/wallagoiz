@@ -12,3 +12,5 @@ const SignUp = () => {
 }
 
 export default SignUp
+
+/* Lo dejo aqui, organizando la grid y empezando a implementar los inputs */

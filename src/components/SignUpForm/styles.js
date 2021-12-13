@@ -3,6 +3,7 @@ export const styleProps = {
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
+  gap: 2,
   color: 'black',
   backgroundColor: '#f3f6cf',
   boxShadow: 5,
