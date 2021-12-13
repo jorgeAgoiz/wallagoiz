@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from '@mui/material'
+import { Grid } from '@mui/material'
 import NavBar from '../NavBar/NavBar'
 import SearchBar from '../SearchBar/SearchBar'
 import Home from '../../pages/Home'
@@ -13,7 +13,7 @@ import { bgColor } from './styles'
 
 function App () {
   return (
-    <Container sx={bgColor}>
+    <Grid container sx={bgColor} rowSpacing={2}>
       <Router>
         <NavBar />
         <SearchBar />
@@ -22,11 +22,8 @@ function App () {
           <Route exact path='/signup' element={<SignUp />} />
         </Routes>
       </Router>
-    </Container>
+    </Grid>
   )
 }
 
 export default App
-
-/* Aqui quizá tanto el componente searchbar como previewlist meterlo en otro componente aparte
-envuelto en un Fragment */

@@ -1,11 +1,11 @@
 import React from 'react'
-import { Box } from '@mui/material'
+import { Grid } from '@mui/material'
 import PreviewCard from '../../components/PreviewCard/PreviewCard'
 import { styleProps } from './styles'
 
 const Home = () => {
   return (
-    <Box sx={styleProps}>
+    <Grid item xs={12} sx={styleProps}>
       <PreviewCard />
       <PreviewCard />
       <PreviewCard />
@@ -18,7 +18,7 @@ const Home = () => {
       <PreviewCard />
       <PreviewCard />
       <PreviewCard />
-    </Box>
+    </Grid>
   )
 }
 

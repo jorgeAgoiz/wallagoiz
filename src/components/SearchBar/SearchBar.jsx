@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Grid } from '@mui/material'
 import InputBase from '@mui/material/InputBase'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -23,12 +24,15 @@ const SearchBar = () => {
   }
 
   return (
-    <Box sx={stylePropsBox} component='form' name='search-form' onSubmit={onHandleSubmit}>
-      <InputBase sx={stylePropsInputRoot} inputProps={stylePropsInput} onChange={onHandleChange} />
-      <Button variant='contained' size='small' type='submit' sx={stylePropsButton}>
-        Busqueda
-      </Button>
-    </Box>
+    <Grid item xs={12} md={9} lg={6}>
+      <Box sx={stylePropsBox} component='form' name='search-form' onSubmit={onHandleSubmit}>
+        <InputBase sx={stylePropsInputRoot} inputProps={stylePropsInput} onChange={onHandleChange} />
+        <Button variant='contained' size='small' type='submit' sx={stylePropsButton}>
+          Busqueda
+        </Button>
+      </Box>
+    </Grid>
+
   )
 }
 

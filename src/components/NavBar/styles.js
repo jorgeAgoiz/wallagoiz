@@ -1,6 +1,14 @@
 export const styleProps = {
-  gridColumn: '1 / 7',
-  gridRow: '1 / 2',
   backgroundColor: '#79955a',
+  color: 'black',
+  minHeight: '80px',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center'
+}
+
+export const stylePropsLink = {
+  textDecoration: 'none',
   color: 'black'
 }

@@ -1,12 +1,13 @@
 import React from 'react'
-import { Box } from '@mui/material'
+import { Grid } from '@mui/material'
 import { styleProps } from './styles'
+import SignUpForm from '../../components/SignUpForm/SignUpForm'
 
 const SignUp = () => {
   return (
-    <Box sx={styleProps}>
-      <h1>Formulario de Registro</h1>
-    </Box>
+    <Grid item xs={12} sm={8} md={7} sx={styleProps}>
+      <SignUpForm />
+    </Grid>
   )
 }
 
