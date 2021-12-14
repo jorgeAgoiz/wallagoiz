@@ -13,8 +13,12 @@ export const INITIAL_FORM_STATE = {
   password: '',
   confirmPassword: ''
 }
+
 /* Sign In Form */
 export const INITIAL_FORM_STATE_SI = {
   email: '',
   password: ''
 }
+
+/* API URLS */
+export const SERVER_URL = 'http://localhost:3012'

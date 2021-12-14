@@ -1,5 +1,6 @@
 /* import { Box } from '@mui/material' */
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import { styleProps, stylePropsButton } from './styles'
 import { Formik, Form } from 'formik'
@@ -7,6 +8,7 @@ import { Button, Typography } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import TextfieldWrapper from '../TextfieldWrapper'
 import { INITIAL_FORM_STATE } from '../../constants'
+import { createUser } from '../../services/createUser'
 
 // Validation ****************
 const FORM_VALIDATION = Yup.object().shape({
@@ -24,18 +26,20 @@ const FORM_VALIDATION = Yup.object().shape({
 // Validation ***************
 
 const SignUpForm = () => {
+  const navigate = useNavigate()
+
   return (
     <>
       <Formik
         initialValues={{ ...INITIAL_FORM_STATE }}
         validationSchema={FORM_VALIDATION}
-        onSubmit={(values, { setFieldError }) => {
+        onSubmit={async (values, { setFieldError }) => {
           if (values.password !== values.confirmPassword) {
             return setFieldError('confirmPassword', 'Las contraseñas deben coincidir.')
           }
-          console.log(values)
-          /* hariamos esta función async, comparariamos los passwords
-          y si todo esta correcto mandariamos a la api los datos */
+          const newUser = await createUser(values)
+          console.log(newUser)
+          return navigate('/')
         }}
       >
         <Form style={styleProps}>
