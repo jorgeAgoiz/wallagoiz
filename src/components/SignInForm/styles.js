@@ -10,5 +10,5 @@ export const styleProps = {
 }
 
 export const stylePropsButton = {
-  marginTop: '0.4rem'
+  marginTop: '1rem'
 }

@@ -7,8 +7,9 @@ const TextfieldWrapper = ({ name, label, ...otherProps }) => {
   const [field, meta] = useField(name)
 
   const configTextField = {
-    id: 'outlined-basic',
+    id: `outlined-${name}`,
     label: label,
+    size: 'small',
     variant: 'outlined',
     ...otherProps,
     ...field,

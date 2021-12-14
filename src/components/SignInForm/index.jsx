@@ -1,54 +1,47 @@
-/* import { Box } from '@mui/material' */
 import React from 'react'
-import * as Yup from 'yup'
-import { styleProps, stylePropsButton } from './styles'
 import { Formik, Form } from 'formik'
+import * as Yup from 'yup'
 import { Button, Typography } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import TextfieldWrapper from '../TextfieldWrapper'
-import { INITIAL_FORM_STATE } from '../../constants'
+import { INITIAL_FORM_STATE_SI } from '../../constants'
+import { styleProps, stylePropsButton } from './styles'
 
 // Validation ****************
 const FORM_VALIDATION = Yup.object().shape({
-  name: Yup.string()
-    .required('Required')
-    .min(3, 'Introduce un nombre válido.'),
   email: Yup.string()
     .required()
     .email('Introduce un email válido.'),
   password: Yup.string()
-    .required('Requerido.'),
-  confirmPassword: Yup.string()
     .required('Requerido.')
 })
 // Validation ***************
 
-const SignUpForm = () => {
+const SignInForm = () => {
   return (
     <>
       <Formik
-        initialValues={{ ...INITIAL_FORM_STATE }}
+        initialValues={{ ...INITIAL_FORM_STATE_SI }}
         validationSchema={FORM_VALIDATION}
         onSubmit={(values, { setFieldError }) => {
-          if (values.password !== values.confirmPassword) {
-            return setFieldError('confirmPassword', 'Las contraseñas deben coincidir.')
+          if (values.password !== 'probando') {
+            return setFieldError('password', 'Contraseña Incorrecta')
           }
           console.log(values)
-          /* hariamos esta función async, comparariamos los passwords
-          y si todo esta correcto mandariamos a la api los datos */
+          /* hariamos esta función async, enviariamos los datos a la API y refrescariamos
+          el contexto global de loggeo */
         }}
       >
         <Form style={styleProps}>
-          <Typography variant='h5' marginBottom='1rem'>Registrarse</Typography>
-          <TextfieldWrapper name='name' label='Nombre' />
+          <Typography variant='h5' marginBottom='1rem'>Iniciar sesión</Typography>
           <TextfieldWrapper name='email' label='Email' />
           <TextfieldWrapper name='password' label='Contraseña' type='password' />
-          <TextfieldWrapper name='confirmPassword' label='Confirmar contraseña' type='password' />
           <Button type='submit' variant='contained' sx={stylePropsButton} color='success' endIcon={<SendIcon />}>Enviar</Button>
         </Form>
       </Formik>
     </>
+
   )
 }
 
-export default SignUpForm
+export default SignInForm

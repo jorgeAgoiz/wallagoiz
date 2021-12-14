@@ -13,3 +13,8 @@ export const INITIAL_FORM_STATE = {
   password: '',
   confirmPassword: ''
 }
+/* Sign In Form */
+export const INITIAL_FORM_STATE_SI = {
+  email: '',
+  password: ''
+}

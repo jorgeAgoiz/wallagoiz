@@ -1,3 +1,3 @@
 export const styleProps = {
-  height: '12vh'
+  height: '11vh'
 }
