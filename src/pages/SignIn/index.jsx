@@ -5,7 +5,7 @@ import { styleProps } from './styles'
 
 const SignIn = () => {
   return (
-    <Grid item xs={12} sm={8} md={6} sx={styleProps} marginTop={2}>
+    <Grid item xs={12} sm={10} md={8} sx={styleProps} marginTop={5}>
       <SignInForm />
     </Grid>
   )

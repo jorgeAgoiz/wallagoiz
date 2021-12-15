@@ -9,7 +9,9 @@ export const avatarOne = 'https://i.pravatar.cc/150?img=44'
 /* Sign Up Form */
 export const INITIAL_FORM_STATE = {
   name: '',
+  lastName: '',
   email: '',
+  location: '',
   password: '',
   confirmPassword: ''
 }

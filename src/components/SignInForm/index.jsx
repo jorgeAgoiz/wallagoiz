@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { Button, Typography } from '@mui/material'
@@ -6,6 +7,8 @@ import SendIcon from '@mui/icons-material/Send'
 import TextfieldWrapper from '../TextfieldWrapper'
 import { INITIAL_FORM_STATE_SI } from '../../constants'
 import { styleProps, stylePropsButton } from './styles'
+import { SignInUser } from '../../services/createUser'
+import { UserContext } from '../../context/UserContext'
 
 // Validation ****************
 const FORM_VALIDATION = Yup.object().shape({
@@ -18,18 +21,27 @@ const FORM_VALIDATION = Yup.object().shape({
 // Validation ***************
 
 const SignInForm = () => {
+  const navigate = useNavigate()
+  const { setUserLog } = useContext(UserContext)
+
   return (
     <>
       <Formik
         initialValues={{ ...INITIAL_FORM_STATE_SI }}
         validationSchema={FORM_VALIDATION}
-        onSubmit={(values, { setFieldError }) => {
-          if (values.password !== 'probando') {
-            return setFieldError('password', 'Contraseña Incorrecta')
+        onSubmit={async (values, { setFieldError }) => {
+          try {
+            // N1 - Implementacion de JWT y modificaciones en el metodo
+            const result = await SignInUser(values)
+            if (result.length <= 0) {
+              return setFieldError('password', 'Contraseña Incorrecta')
+            }
+            await setUserLog({ email: result[0].email, id: result[0].id, logged: true })
+            return navigate('/')
+          } catch (err) {
+            return console.log(err)
           }
-          console.log(values)
-          /* hariamos esta función async, enviariamos los datos a la API y refrescariamos
-          el contexto global de loggeo */
+          // **********************************************************
         }}
       >
         <Form style={styleProps}>

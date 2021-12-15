@@ -1,11 +1,12 @@
 import React, { useState, createContext } from 'react'
 
+/* N2 - Hay que rediseñar los campos de este contexto */
 const userData = {
-  username: null,
+  email: null,
   id: null,
   logged: false
 }
-
+// *****************************************************
 export const UserContext = createContext({})
 
 export const UserContextProvider = ({ children }) => {
@@ -17,4 +18,3 @@ export const UserContextProvider = ({ children }) => {
     </UserContext.Provider>
   )
 }
-/* Hay que rediseñar este contexto */

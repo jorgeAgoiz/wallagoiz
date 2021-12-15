@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar'
 import { Grid } from '@mui/material'
@@ -16,11 +16,12 @@ import NavBarPagesIcon from '../NavBarPagesIcon/NavBarPagesIcon'
 import NavBarPagesExpand from '../NavBarPagesExpand/NavBarPagesExpand'
 import { styleProps, stylePropsLink } from './styles'
 import { avatarOne, settings, signIn } from '../../constants/index'
+import { UserContext } from '../../context/UserContext'
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
-  const [logged, setLogged] = useState(false)/* Simulamos un estado de autenticacion */
+  const { userLog, setUserLog } = useContext(UserContext)
   const navigate = useNavigate()
 
   const handleOpenNavMenu = (event) => {
@@ -32,18 +33,22 @@ const NavBar = () => {
   }
   const handleCloseNavMenu = (event) => {
     setAnchorElNav(null)
-    // Aqui controlamos la autenticación de manera provisional
+    /* N3 - Esto hay que darle otro enfoque:
+      - Modal de confirmación para cerrar sesión
+      - Extraer esta lógica en una función aislada.
+      - Hacer aqui la limpieza del storage.
+    */
     const textOption = event.target.innerText
     if (textOption === signIn[0]) {
-      setLogged(true)
       return navigate('/signin')
     }
     if (textOption === settings[3]) {
-      setLogged(false)
+      setUserLog({ email: null, id: null, logged: false })
     }
     if (textOption === signIn[1]) {
       return navigate('/signup')
     }
+    // *****************************************************
   }
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
@@ -84,7 +89,7 @@ const NavBar = () => {
 
             {/* Si esta autenticado se muestra el menu de icono en pantalla pequeña, de lo contrario nada */}
             {
-          logged
+          userLog.logged
             ? <NavBarPagesIcon
                 handleCloseNavMenu={handleCloseNavMenu}
                 handleOpenNavMenu={handleOpenNavMenu}
@@ -102,7 +107,7 @@ const NavBar = () => {
             </Typography>
             {/* Si esta autenticado se muestran los botones en el header, de lo contario nada */}
             {
-            logged
+            userLog.logged
               ? <NavBarPagesExpand handleCloseNavMenu={handleCloseNavMenu} />
               : <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }} />
           }
@@ -111,7 +116,7 @@ const NavBar = () => {
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   {/* Si esta autenticado se muestra el avatar, de lo contario un Icon */}
                   {
-                logged
+                userLog.logged
                   ? <Avatar alt='V' src={avatarOne} />
                   : <EnhancedEncryptionRoundedIcon fontSize='large' />
                 }
@@ -133,7 +138,7 @@ const NavBar = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {logged ? userLogged() : userNoLogged()}
+                {userLog.logged ? userLogged() : userNoLogged()}
               </Menu>
             </Box>
           </Toolbar>
