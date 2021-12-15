@@ -39,12 +39,23 @@ const SignUpForm = () => {
         initialValues={{ ...INITIAL_FORM_STATE }}
         validationSchema={FORM_VALIDATION}
         onSubmit={async (values, { setFieldError }) => {
+          /* N5 - Implementaciones necesarias:
+            - Mejorar el manejo de errores.
+           */
           if (values.password !== values.confirmPassword) {
             return setFieldError('confirmPassword', 'Las contraseñas deben coincidir.')
           }
-          const newUser = await createUser(values)
-          console.log(newUser)
-          return navigate('/')
+          try {
+            const newUser = await createUser(values)
+            if (!newUser.id) {
+              return console.log('Something went wrong')
+            }
+            return navigate('/')
+          } catch (err) {
+            console.log(err)
+            return navigate('/error')
+          }
+          // ************************************************
         }}
       >
         <Form style={styleProps}>

@@ -86,8 +86,6 @@ const NavBar = () => {
                 <Link to='/' style={stylePropsLink}>Wallagoiz</Link>
               </Typography>
             </Tooltip>
-
-            {/* Si esta autenticado se muestra el menu de icono en pantalla pequeña, de lo contrario nada */}
             {
           userLog.logged
             ? <NavBarPagesIcon
@@ -105,16 +103,14 @@ const NavBar = () => {
             >
               <Link to='/' style={stylePropsLink}>Wallagoiz</Link>
             </Typography>
-            {/* Si esta autenticado se muestran los botones en el header, de lo contario nada */}
             {
             userLog.logged
               ? <NavBarPagesExpand handleCloseNavMenu={handleCloseNavMenu} />
               : <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }} />
           }
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title='Open settings'>
+              <Tooltip title='Open Settings'>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  {/* Si esta autenticado se muestra el avatar, de lo contario un Icon */}
                   {
                 userLog.logged
                   ? <Avatar alt='V' src={avatarOne} />

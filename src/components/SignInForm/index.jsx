@@ -39,7 +39,8 @@ const SignInForm = () => {
             await setUserLog({ email: result[0].email, id: result[0].id, logged: true })
             return navigate('/')
           } catch (err) {
-            return console.log(err)
+            console.log(err)
+            return navigate('/error')
           }
           // **********************************************************
         }}

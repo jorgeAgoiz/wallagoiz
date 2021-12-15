@@ -1,14 +1,33 @@
-import { CardMedia, Grid } from '@mui/material'
+import { ThemeProvider } from '@emotion/react'
+import { CardMedia, Grid, Typography, Button } from '@mui/material'
+import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 import React from 'react'
-import { styleProps, stylePropsIFrame } from './styles'
+import { useNavigate } from 'react-router-dom'
+import errorImg from '../../images/errorImage.jpg'
+import { styleProps, stylePropsImg } from './styles'
+
+let themeResponsive = createTheme()
+themeResponsive = responsiveFontSizes(themeResponsive)
 
 const NotFound = () => {
+  const navigate = useNavigate()
+
+  const comeBack = () => {
+    return navigate('/')
+  }
+
   return (
-    <Grid container xs={12} sx={styleProps}>
-      <h1>Not Found 404</h1>
-      <CardMedia component='iframe' src='https://giphy.com/embed/H7wajFPnZGdRWaQeu0' height='420px' width='420px' sx={stylePropsIFrame} />
+    <Grid container sx={styleProps}>
+      <ThemeProvider theme={themeResponsive}>
+        <Typography variant='h3'>Algo ha ido mal...</Typography>
+        <CardMedia component='img' src={errorImg} height='300px' width='300px' sx={stylePropsImg} />
+        <Typography variant='h3'>404</Typography>
+      </ThemeProvider>
+      <Button variant='contained' color='success' size='large' onClick={comeBack}>
+        Volver a inicio
+      </Button>
     </Grid>
   )
 }
-/* Seguimos diseñando esto */
+
 export default NotFound
