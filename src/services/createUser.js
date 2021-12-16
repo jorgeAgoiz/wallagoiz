@@ -18,7 +18,6 @@ export const createUser = ({ name, lastName, email, password, location }) => {
     body: JSON.stringify(newUser)
   })
     .then(data => data.json())
-    .then(result => result)
     .catch(err => err)
 }
 
@@ -31,6 +30,5 @@ export const SignInUser = ({ email, password }) => {
     method: 'GET'
   })
     .then(data => data.json())
-    .then(result => result)
     .catch(err => err)
 }
