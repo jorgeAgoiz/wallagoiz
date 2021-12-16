@@ -1,16 +1,21 @@
 import React, { useState, createContext } from 'react'
 
-/* N2 - Hay que rediseñar los campos de este contexto */
-const userData = {
+export const userDataState = {
+  name: null,
+  lastName: null,
+  location: null,
+  gender: null,
+  birthday: null,
+  profilePic: null,
   email: null,
   id: null,
   logged: false
 }
-// *****************************************************
+
 export const UserContext = createContext({})
 
 export const UserContextProvider = ({ children }) => {
-  const [userLog, setUserLog] = useState(userData)
+  const [userLog, setUserLog] = useState(userDataState)
 
   return (
     <UserContext.Provider value={{ userLog, setUserLog }}>

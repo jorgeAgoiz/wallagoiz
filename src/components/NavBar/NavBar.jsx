@@ -15,8 +15,9 @@ import EnhancedEncryptionRoundedIcon from '@mui/icons-material/EnhancedEncryptio
 import NavBarPagesIcon from '../NavBarPagesIcon/NavBarPagesIcon'
 import NavBarPagesExpand from '../NavBarPagesExpand/NavBarPagesExpand'
 import { styleProps, stylePropsLink } from './styles'
-import { avatarOne, settings, signIn } from '../../constants/index'
-import { UserContext } from '../../context/UserContext'
+import { settings, signIn } from '../../constants/index'
+import { UserContext, userDataState } from '../../context/UserContext'
+import { emptyAvatarPic } from '../../utils/createAvatar'
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null)
@@ -43,7 +44,9 @@ const NavBar = () => {
       return navigate('/signin')
     }
     if (textOption === settings[3]) {
-      setUserLog({ email: null, id: null, logged: false })
+      setUserLog(userDataState)
+      /* global sessionStorage */
+      return sessionStorage.clear()
     }
     if (textOption === signIn[1]) {
       return navigate('/signup')
@@ -54,8 +57,6 @@ const NavBar = () => {
     setAnchorElUser(null)
   }
 
-  /* En caso de estar autenticado mostramos unas opciones en el menu desplegable, de lo contrario
-  otras diferentes */
   const userLogged = () => {
     return settings.map((setting) => (
       <MenuItem key={setting} onClick={handleCloseNavMenu}>
@@ -112,9 +113,9 @@ const NavBar = () => {
               <Tooltip title='Open Settings'>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   {
-                userLog.logged
-                  ? <Avatar alt='V' src={avatarOne} />
-                  : <EnhancedEncryptionRoundedIcon fontSize='large' />
+                userLog.logged // N6 - En función de si existe o no foto de perfil tendremos que modificar esto
+                  ? <Avatar alt='Profile Pic'>{emptyAvatarPic(userLog)}</Avatar>
+                  : <EnhancedEncryptionRoundedIcon fontSize='large' /> // **********************************
                 }
                 </IconButton>
               </Tooltip>

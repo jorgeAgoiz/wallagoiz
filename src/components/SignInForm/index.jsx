@@ -32,11 +32,17 @@ const SignInForm = () => {
         onSubmit={async (values, { setFieldError }) => {
           try {
             // N1 - Implementacion de JWT y modificaciones en el metodo
+            // y en la manera de guardar los campos
             const result = await SignInUser(values)
             if (result.length <= 0) {
               return setFieldError('password', 'Contraseña Incorrecta')
             }
-            await setUserLog({ email: result[0].email, id: result[0].id, logged: true })
+            await setUserLog({
+              ...result[0],
+              logged: true
+            })
+            /* global sessionStorage */
+            sessionStorage.setItem('email', result[0].email)
             return navigate('/')
           } catch (err) {
             console.log(err)

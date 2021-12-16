@@ -3,8 +3,8 @@ export const pages = ['Favoritos', 'Súbelo', 'Buzón']
 export const settings = ['Perfil', 'Cuenta', 'Tus productos', 'Cerrar Sesión']
 export const signIn = ['Iniciar sesión', 'Registrarse']
 
-/* Avatars */
-export const avatarOne = 'https://i.pravatar.cc/150?img=44'
+/* Avatars de prueba */
+/* export const avatarOne = 'https://i.pravatar.cc/150?img=44' */
 
 /* Sign Up Form */
 export const INITIAL_FORM_STATE = {
@@ -14,6 +14,18 @@ export const INITIAL_FORM_STATE = {
   location: '',
   password: '',
   confirmPassword: ''
+}
+/* Entidad Usuario por defecto */
+export const defaultUser = {
+  name: null,
+  lastName: null,
+  email: null,
+  location: null,
+  id: null,
+  gender: null,
+  birthday: null,
+  profilePic: null,
+  password: null
 }
 
 /* Sign In Form */
