@@ -23,7 +23,7 @@ function App () {
   - Creación de una pagina 404 Error para derivar alli cualquier problema tecnico
    */
   return (
-    <Grid container sx={bgColor} rowSpacing={2}>
+    <Grid container sx={bgColor}>
       <Router>
         <NavBar />
         <SearchBar />
