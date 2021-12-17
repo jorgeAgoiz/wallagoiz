@@ -34,15 +34,16 @@ const SignInForm = () => {
             // N1 - Implementacion de JWT y modificaciones en el metodo
             // y en la manera de guardar los campos
             const result = await SignInUser(values)
-            if (result.length <= 0) {
+
+            if (!result.id) {
               return setFieldError('password', 'Contraseña Incorrecta')
             }
             await setUserLog({
-              ...result[0],
+              ...result,
               logged: true
             })
             /* global sessionStorage */
-            sessionStorage.setItem('email', result[0].email)
+            sessionStorage.setItem('email', result.email)
             return navigate('/')
           } catch (err) {
             console.log(err)

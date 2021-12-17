@@ -30,7 +30,7 @@ const NavBar = () => {
   }
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget)
-    console.log(event.currentTarget)
+    /* console.log(event.currentTarget) */
   }
   const handleCloseNavMenu = (event) => {
     setAnchorElNav(null)
@@ -43,13 +43,17 @@ const NavBar = () => {
     if (textOption === signIn[0]) {
       return navigate('/signin')
     }
+    if (textOption === signIn[1]) {
+      return navigate('/signup')
+    }
     if (textOption === settings[3]) {
       setUserLog(userDataState)
       /* global sessionStorage */
-      return sessionStorage.clear()
+      sessionStorage.clear()
+      return navigate('/')
     }
-    if (textOption === signIn[1]) {
-      return navigate('/signup')
+    if (textOption === settings[1]) {
+      return navigate('/account')
     }
     // *****************************************************
   }
