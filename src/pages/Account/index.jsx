@@ -1,18 +1,16 @@
 
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { UserContext } from '../../context/UserContext'
 import { Formik, Form } from 'formik'
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material'
+import { Box, Button, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, Typography } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
-import { styleProps, stylePropsButton, stylePropsForm, stylePropsPersonal, stylePropsTitle, stylePropsBoxBtn } from './styles'
+import { styleProps, stylePropsButton, stylePropsForm, stylePropsPersonal, stylePropsTitle } from './styles'
 import TextfieldWrapper from '../../components/TextfieldWrapper'
 
-/* const VALIDATION_SCHEMA = {
-
-} */
-
 const Account = () => {
-  const { userLog } = useContext(UserContext)
+  const { userLog, setUserLog } = useContext(UserContext)
+  const gender = 'gender'
+  const birthday = 'birthday'
 
   return (
     <Grid container sx={styleProps} sm={12} md={10}>
@@ -22,31 +20,39 @@ const Account = () => {
       <Grid item xs={12} sx={stylePropsPersonal}>
         <Typography variant='h6' textAlign='center'>Información personal</Typography>
         <Formik
-          initialValues={{ gender: '', birthday: userLog.birthday }}
-          validationSchema={VALIDATION_SCHEMA}
-          onSubmit={(values) => console.log(values)}
+          initialValues={{
+            gender: userLog.gender,
+            birthday: userLog.birthday
+          }}
+          onSubmit={(values) => {
+            /* Solucionado el tema, ahora necesitamos realizar la llamada a la API para actualizar los datos */
+            return setUserLog({ ...userLog, gender: values.gender, birthday: values.birthday })
+          }}
         >
-          <Form style={stylePropsForm}>
-            <TextfieldWrapper name='birthday' label='Fecha de nacimiento' />
-            <FormControl name='gender'>
-              <InputLabel id='demo-simple-select-label'>Age</InputLabel>
-              <Select
-                name='gender'
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
-                defaultValue='hombre'
-                label='Age'
-                onChange={(evt) => console.log(evt.target.value)}
-              >
-                <MenuItem value='hombre'>Hombre</MenuItem>
-                <MenuItem value='mujer'>Mujer</MenuItem>
-              </Select>
-            </FormControl>
+          {({ values, setFieldValue }) => (
+            <Form style={stylePropsForm}>
+              <FormControl component='fieldset'>
+                <FormLabel component='legend'>Sexo</FormLabel>
+                <RadioGroup
+                  name={gender} value={values.gender} onChange={(event) => {
+                    setFieldValue(gender, event.currentTarget.value)
+                  }}
+                >
+                  <FormControlLabel value='hombre' control={<Radio />} label='Hombre' />
+                  <FormControlLabel value='mujer' control={<Radio />} label='Mujer' />
+                </RadioGroup>
+              </FormControl>
+              <TextfieldWrapper
+                id='outlined-basic' name='birthday' label='Fecha de nacimiento' variant='outlined' value={values.birthday} onChange={(event) => {
+                  setFieldValue(birthday, event.currentTarget.value)
+                }}
+              />
+              <Box sx={stylePropsButton}>
+                <Button type='submit' variant='contained' color='success' endIcon={<SendIcon />}>Enviar</Button>
+              </Box>
 
-            <Box sx={stylePropsBoxBtn}>
-              <Button type='submit' variant='contained' sx={stylePropsButton} color='success' endIcon={<SendIcon />}>Guardar</Button>
-            </Box>
-          </Form>
+            </Form>
+          )}
         </Formik>
       </Grid>
       <Grid item xs={12}>

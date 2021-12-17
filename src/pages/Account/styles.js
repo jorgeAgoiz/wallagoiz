@@ -26,18 +26,15 @@ export const stylePropsForm = {
   flexDirection: 'row',
   justifyContent: 'space-around',
   alignItems: 'center',
-  gap: '0.4rem',
+  gap: '1rem',
   color: 'black',
   padding: '0.4rem',
   width: '100%',
   flexWrap: 'wrap'
 }
-export const stylePropsBoxBtn = {
+export const stylePropsButton = {
+  marginTop: '0.4rem',
   width: '100%',
   display: 'flex',
-  placeContent: 'center',
-  padding: '0.5rem'
-}
-export const stylePropsButton = {
-  marginTop: '0.4rem'
+  placeContent: 'center'
 }
