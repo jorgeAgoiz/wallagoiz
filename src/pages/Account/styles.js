@@ -3,38 +3,39 @@ export const styleProps = {
   justifyContent: 'center',
   alignItems: 'center',
   gap: '1rem',
-  backgroundColor: '#f3f6cf',
+  backgroundColor: '#ffecb3',
   boxShadow: 4,
   borderRadius: 4,
-  padding: '0.3rem'
+  padding: '0.6rem',
+  marginTop: '3rem'
 }
 export const stylePropsTitle = {
   display: 'flex',
   placeContent: 'center'
 }
-export const stylePropsPersonal = {
+export const stylePropsSettings = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   gap: '0.6rem',
-  border: '1px solid black',
-  borderRadius: 4
+  borderRadius: 4,
+  width: '100%',
+  padding: '1rem'
 }
-export const stylePropsForm = {
+export const stylePropsSetBtn = {
   display: 'flex',
   flexDirection: 'row',
-  justifyContent: 'space-around',
-  alignItems: 'center',
-  gap: '1rem',
-  color: 'black',
-  padding: '0.4rem',
+  justifyContent: 'space-evenly',
+  alignItems: 'end',
+  flexWrap: 'wrap',
   width: '100%',
-  flexWrap: 'wrap'
+  padding: 2,
+  gap: 2
 }
-export const stylePropsButton = {
-  marginTop: '0.4rem',
-  width: '100%',
+export const styleEmailBtn = {
   display: 'flex',
-  placeContent: 'center'
+  flexDirection: 'column',
+  placeContent: 'center',
+  gap: 1
 }

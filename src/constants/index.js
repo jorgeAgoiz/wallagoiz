@@ -22,8 +22,6 @@ export const defaultUser = {
   email: null,
   location: null,
   id: null,
-  gender: null,
-  birthday: null,
   profilePic: null,
   password: null
 }

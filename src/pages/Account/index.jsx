@@ -1,68 +1,42 @@
 
 import React, { useContext } from 'react'
 import { UserContext } from '../../context/UserContext'
-import { Formik, Form } from 'formik'
-import { Box, Button, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, Typography } from '@mui/material'
-import SendIcon from '@mui/icons-material/Send'
-import { styleProps, stylePropsButton, stylePropsForm, stylePropsPersonal, stylePropsTitle } from './styles'
-import TextfieldWrapper from '../../components/TextfieldWrapper'
+import { Box, Button, Grid, Typography } from '@mui/material'
+import { styleEmailBtn, styleProps, stylePropsSetBtn, stylePropsSettings, stylePropsTitle } from './styles'
 
 const Account = () => {
-  const { userLog, setUserLog } = useContext(UserContext)
-  const gender = 'gender'
-  const birthday = 'birthday'
+  const { userLog } = useContext(UserContext)
 
   return (
     <Grid container sx={styleProps} sm={12} md={10}>
       <Grid item xs={12} sx={stylePropsTitle}>
-        <Typography variant='h4'>Cuenta</Typography>
+        <Typography variant='h4'>Infomación Cuenta</Typography>
       </Grid>
-      <Grid item xs={12} sx={stylePropsPersonal}>
-        <Typography variant='h6' textAlign='center'>Información personal</Typography>
-        <Formik
-          initialValues={{
-            gender: userLog.gender,
-            birthday: userLog.birthday
-          }}
-          onSubmit={(values) => {
-            /* Solucionado el tema, ahora necesitamos realizar la llamada a la API para actualizar los datos */
-            return setUserLog({ ...userLog, gender: values.gender, birthday: values.birthday })
-          }}
-        >
-          {({ values, setFieldValue }) => (
-            <Form style={stylePropsForm}>
-              <FormControl component='fieldset'>
-                <FormLabel component='legend'>Sexo</FormLabel>
-                <RadioGroup
-                  name={gender} value={values.gender} onChange={(event) => {
-                    setFieldValue(gender, event.currentTarget.value)
-                  }}
-                >
-                  <FormControlLabel value='hombre' control={<Radio />} label='Hombre' />
-                  <FormControlLabel value='mujer' control={<Radio />} label='Mujer' />
-                </RadioGroup>
-              </FormControl>
-              <TextfieldWrapper
-                id='outlined-basic' name='birthday' label='Fecha de nacimiento' variant='outlined' value={values.birthday} onChange={(event) => {
-                  setFieldValue(birthday, event.currentTarget.value)
-                }}
-              />
-              <Box sx={stylePropsButton}>
-                <Button type='submit' variant='contained' color='success' endIcon={<SendIcon />}>Enviar</Button>
-              </Box>
 
-            </Form>
-          )}
-        </Formik>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant='h6'>Información cuenta</Typography>
+      <Grid item xs={12} sx={stylePropsSettings}>
+        <Box sx={stylePropsSetBtn}>
+          <Box sx={styleEmailBtn}>
+            <Typography variant='subtitle1'>{userLog.email}</Typography>
+            <Button variant='outlined' color='warning'>Cambiar Email</Button>
+          </Box>
+          <Box>
+            <Button variant='outlined' color='warning'>Cambiar Contraseña</Button>
+          </Box>
+        </Box>
+        <Box>
+          <Button variant='contained' color='error'>Darme de baja</Button>
+        </Box>
       </Grid>
     </Grid>
   )
 }
 
 export default Account
+
+/*
+ Plantear las modales que se van a abrir con cada uno de los botones de la información de
+cuenta.
+ Limpiar los estilos, no me convencen los nombres de las variables, es muy confuso todo.   */
 
 /* Lo dejamos aqui:
 https://levelup.gitconnected.com/create-a-controlled-radio-group-in-react-formik-material-ui-and-typescript-7ed314081a0e

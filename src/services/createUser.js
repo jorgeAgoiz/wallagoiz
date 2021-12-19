@@ -35,8 +35,6 @@ export const SignInUser = ({ email, password }) => {
         email: result[0].email,
         location: result[0].location,
         id: result[0].id,
-        gender: result[0].gender,
-        birthday: result[0].birthday,
         profilePic: result[0].profilePic
       }
     })

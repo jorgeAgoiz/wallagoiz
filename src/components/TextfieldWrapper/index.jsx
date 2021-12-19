@@ -3,7 +3,7 @@ import { useField } from 'formik'
 import React from 'react'
 import { styleProps } from './styles'
 
-const TextfieldWrapper = ({ name, label, ...otherProps }) => {
+const TextfieldWrapper = ({ name, label, customStyle, ...otherProps }) => {
   const [field, meta] = useField(name)
 
   const configTextField = {
@@ -13,7 +13,7 @@ const TextfieldWrapper = ({ name, label, ...otherProps }) => {
     variant: 'outlined',
     ...otherProps,
     ...field,
-    sx: styleProps
+    sx: customStyle || styleProps
   }
   if (meta && meta.touched && meta.error) {
     configTextField.error = true
