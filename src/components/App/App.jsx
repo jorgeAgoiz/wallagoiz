@@ -13,7 +13,6 @@ import { bgColor } from './styles'
 import SignIn from '../../pages/SignIn'
 import { UserContext } from '../../context/UserContext'
 import NotFound from '../../pages/NotFound'
-import Account from '../../pages/Account'
 
 function App () {
   const { userLog } = useContext(UserContext)
@@ -31,7 +30,6 @@ function App () {
           <Route exact path='/' element={<Home />} />
           <Route exact path='/signup' element={<SignUp />} />
           <Route exact path='/signin' element={<SignIn />} />
-          <Route exact path='/account' element={userLog.logged ? <Account /> : <Home />} />
           <Route exact path='/error' element={<NotFound />} />
         </Routes>
       </Router>
