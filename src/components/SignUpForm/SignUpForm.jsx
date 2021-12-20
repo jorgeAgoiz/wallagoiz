@@ -17,8 +17,8 @@ const schemaSignUp = yup.object({
   lastName: yup.string().required('Requerido'),
   email: yup.string().email().required('Requerido'),
   location: yup.string().required('Requerido'),
-  password: yup.string().min(5, 'Minimo 5 caracteres').required('Requerido'),
-  confirmPassword: yup.string().min(5, 'Minimo 5 caracteres').required('Requerido')
+  password: yup.string().min(5, 'Mínimo 5 caracteres').required('Requerido'),
+  confirmPassword: yup.string().min(5, 'Mínimo 5 caracteres').required('Requerido')
 })
 
 const SignUpForm = () => {
