@@ -44,6 +44,8 @@ const SignInForm = () => {
       }
       delete userSigned[0].password
       setUserLog({ ...userSigned[0], logged: true })
+      /* global sessionStorage */
+      sessionStorage.setItem('id', userSigned[0].id.toString())
       return navigate('/')
     } catch (err) {
       console.log(err)

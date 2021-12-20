@@ -33,6 +33,12 @@ export const SignInUser = ({ email, password }) => {
     .catch(err => err)
 }
 
+export const RefreshAuth = ({ id }) => {
+  return fetch(`${SERVER_URL}/users?id=${id}`)
+    .then(data => data.json())
+    .catch(err => err)
+}
+
 /* Función de prueba para traer fotos y articulos */
 /* export const getArticles = () => {
   return fetch('https://jsonplaceholder.typicode.com/photos')
@@ -40,3 +46,5 @@ export const SignInUser = ({ email, password }) => {
     .then(result => result.slice(0, 9))
     .catch(err => err)
 } */
+
+/* Separar estas funciones en archivos independientes */
