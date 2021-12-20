@@ -4,8 +4,6 @@ export const userDataState = {
   name: null,
   lastName: null,
   location: null,
-  gender: null,
-  birthday: null,
   profilePic: null,
   email: null,
   id: null,

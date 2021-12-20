@@ -3,7 +3,7 @@ export const styleProps = {
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  gap: '0.5rem',
+  gap: '0.6rem',
   color: 'black',
   padding: '0.4rem',
   width: '100%'
@@ -17,8 +17,11 @@ export const stylePropsBox = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-around',
-  alignItems: 'center',
+  alignItems: 'start',
   width: '100%',
   flexWrap: 'wrap',
   gap: 1
+}
+export const stylePropsTf = {
+  height: '8vh'
 }
