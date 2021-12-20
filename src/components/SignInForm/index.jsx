@@ -3,15 +3,14 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { Box, Button, Typography } from '@mui/material'
 import LoginIcon from '@mui/icons-material/Login'
-import SaveIcon from '@mui/icons-material/Save'
-import { LoadingButton } from '@mui/lab'
-import { styleProps, stylePropsButton } from './styles'
-import { INITIAL_FORM_STATE_SI } from '../../constants'
+import { Box, Typography } from '@mui/material'
 import TextFieldWrapper from '../TextfieldWrapper'
+import SubmitButton from '../SubmitButton'
 import { SignInUser } from '../../services/createUser'
 import { UserContext } from '../../context/UserContext'
+import { styleProps, stylePropsButton } from './styles'
+import { INITIAL_FORM_STATE_SI } from '../../constants'
 
 const schemaSignUp = yup.object({
   email: yup.string().email().required('Requerido'),
@@ -53,20 +52,6 @@ const SignInForm = () => {
     /* *************************************************** */
   }
 
-  const submitButton = () => {
-    return !isSubmitting
-      ? <Button type='submit' variant='contained' sx={stylePropsButton} color='success' endIcon={<LoginIcon />}>Iniciar Sesión</Button>
-      : (
-        <LoadingButton
-          loading
-          loadingPosition='end'
-          endIcon={<SaveIcon />}
-          variant='outlined'
-        >
-          Iniciando sesión
-        </LoadingButton>)
-  }
-
   return (
     <>
       <Box component='form' onSubmit={handleSubmit(onSubmit)} style={styleProps}>
@@ -84,9 +69,12 @@ const SignInForm = () => {
           label='Contraseña'
           type='password'
         />
-        {
-          submitButton()
-        }
+        <SubmitButton
+          styles={stylePropsButton}
+          isSubmitting={isSubmitting}
+          Icon={LoginIcon}
+          text='Iniciar sesión'
+        />
       </Box>
     </>
 
@@ -94,5 +82,3 @@ const SignInForm = () => {
 }
 
 export default SignInForm
-
-/* Empezar de cero con react-hook-form */

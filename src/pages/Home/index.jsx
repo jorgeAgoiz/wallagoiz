@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid } from '@mui/material'
-import PreviewCard from '../../components/PreviewCard/PreviewCard'
+import PreviewCard from '../../components/PreviewCard'
 import { styleProps } from './styles'
 
 const Home = () => {

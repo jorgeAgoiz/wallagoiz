@@ -1,28 +1,25 @@
 import React, { useContext } from 'react'
-import { Grid } from '@mui/material'
-import NavBar from '../NavBar/NavBar'
-import SearchBar from '../SearchBar/SearchBar'
-import Home from '../../pages/Home'
-import SignUp from '../../pages/SignUp'
 import {
   BrowserRouter as Router,
   Routes,
   Route
 } from 'react-router-dom'
-import { bgColor } from './styles'
-import SignIn from '../../pages/SignIn'
 import { UserContext } from '../../context/UserContext'
+import { Grid } from '@mui/material'
+import NavBar from '../NavBar'
+import SearchBar from '../SearchBar'
+import Home from '../../pages/Home'
+import SignUp from '../../pages/SignUp'
+import SignIn from '../../pages/SignIn'
 import NotFound from '../../pages/NotFound'
+import { styleProps } from './styles'
 
 function App () {
   const { userLog } = useContext(UserContext)
   console.log(userLog)
-  /* N4 - Implementaciones:
-  - Renderizado condiconal de rutas en función de si el UserContext
-  - Creación de una pagina 404 Error para derivar alli cualquier problema tecnico
-   */
+
   return (
-    <Grid container sx={bgColor}>
+    <Grid container sx={styleProps}>
       <Router>
         <NavBar />
         <SearchBar />
@@ -35,7 +32,6 @@ function App () {
       </Router>
     </Grid>
   )
-  /* ************************************************************** */
 }
 
 export default App

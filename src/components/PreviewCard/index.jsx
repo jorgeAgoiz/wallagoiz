@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useContext } from 'react'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
@@ -7,10 +7,11 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import { styleProps, styleCardActions } from './styles'
+import { UserContext } from '../../context/UserContext'
+import { styleProps, stylePropsCardActions } from './styles'
 
 const PreviewCard = () => {
-  const logged = true// En función del loggeo deberemos desactivar la opcion marcar favorito
+  const { userLog: { logged } } = useContext(UserContext)
   const favorite = false// En función de si es favorito para el usuario
 
   return (
@@ -29,9 +30,9 @@ const PreviewCard = () => {
           43 Euros
         </Typography>
       </CardContent>
-      <CardActions sx={styleCardActions}>
+      <CardActions sx={stylePropsCardActions}>
         <Button size='small'>Detalles</Button>
-        <Button size='small' disabled={logged}>
+        <Button size='small' disabled={!logged}>
           {
             favorite
               ? <FavoriteIcon />

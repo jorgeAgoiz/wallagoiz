@@ -10,7 +10,7 @@ export const stylePropsBox = {
 export const stylePropsInputRoot = {
   width: '70%'
 }
-export const stylePropsInput = {
+export const inputPropsInput = {
   placeholder: 'Buscar...',
   type: 'text',
   name: 'search'

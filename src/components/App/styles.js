@@ -1,4 +1,4 @@
-export const bgColor = {
+export const styleProps = {
   bgcolor: 'transparent',
   p: 2,
   alignItems: 'center',

@@ -6,7 +6,7 @@ import Button from '@mui/material/Button'
 import {
   stylePropsBox,
   stylePropsButton,
-  stylePropsInput,
+  inputPropsInput,
   stylePropsInputRoot
 }
   from './styles'
@@ -26,7 +26,7 @@ const SearchBar = () => {
   return (
     <Grid item xs={12} sm={11} md={9} lg={7}>
       <Box sx={stylePropsBox} component='form' name='search-form' onSubmit={onHandleSubmit}>
-        <InputBase sx={stylePropsInputRoot} inputProps={stylePropsInput} onChange={onHandleChange} />
+        <InputBase sx={stylePropsInputRoot} inputProps={inputPropsInput} onChange={onHandleChange} />
         <Button variant='contained' size='small' type='submit' sx={stylePropsButton}>
           Busqueda
         </Button>
@@ -37,5 +37,3 @@ const SearchBar = () => {
 }
 
 export default SearchBar
-
-/* Seguiremos aqui estilando la barra de busqueda */

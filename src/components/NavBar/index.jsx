@@ -10,14 +10,14 @@ import Menu from '@mui/material/Menu'
 import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
 import Tooltip from '@mui/material/Tooltip'
-import MenuItem from '@mui/material/MenuItem'
 import EnhancedEncryptionRoundedIcon from '@mui/icons-material/EnhancedEncryptionRounded'
-import NavBarPagesIcon from '../NavBarPagesIcon/NavBarPagesIcon'
-import NavBarPagesExpand from '../NavBarPagesExpand/NavBarPagesExpand'
-import { styleProps, stylePropsLink } from './styles'
+import NavBarPagesIcon from '../NavBarPagesIcon'
+import NavBarPagesExpand from '../NavBarPagesExpand'
 import { settings, signIn } from '../../constants/index'
 import { UserContext, userDataState } from '../../context/UserContext'
 import { emptyAvatarPic } from '../../utils/createAvatar'
+import { styleProps, stylePropsLink } from './styles'
+import UserMenu from '../UserMenu'
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null)
@@ -30,7 +30,6 @@ const NavBar = () => {
   }
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget)
-    /* console.log(event.currentTarget) */
   }
   const handleCloseNavMenu = (event) => {
     setAnchorElNav(null)
@@ -61,21 +60,6 @@ const NavBar = () => {
     setAnchorElUser(null)
   }
 
-  const userLogged = () => {
-    return settings.map((setting) => (
-      <MenuItem key={setting} onClick={handleCloseNavMenu}>
-        <Typography textAlign='center'>{setting}</Typography>
-      </MenuItem>
-    ))
-  }
-  const userNoLogged = () => {
-    return signIn.map((signValue) => (
-      <MenuItem key={signValue} onClick={handleCloseNavMenu}>
-        <Typography textAlign='center'>{signValue}</Typography>
-      </MenuItem>
-    ))
-  }
-
   return (
     <Grid item xs={12}>
       <AppBar position='static' sx={styleProps}>
@@ -92,13 +76,12 @@ const NavBar = () => {
               </Typography>
             </Tooltip>
             {
-          userLog.logged
-            ? <NavBarPagesIcon
-                handleCloseNavMenu={handleCloseNavMenu}
-                handleOpenNavMenu={handleOpenNavMenu}
-                anchorElNav={anchorElNav}
-              />
-            : null
+          userLog.logged &&
+            <NavBarPagesIcon
+              handleCloseNavMenu={handleCloseNavMenu}
+              handleOpenNavMenu={handleOpenNavMenu}
+              anchorElNav={anchorElNav}
+            />
           }
             <Typography
               variant='h6'
@@ -139,7 +122,11 @@ const NavBar = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {userLog.logged ? userLogged() : userNoLogged()}
+                {
+                  userLog.logged
+                    ? <UserMenu settings={settings} handleCloseNavMenu={handleCloseNavMenu} />
+                    : <UserMenu settings={signIn} handleCloseNavMenu={handleCloseNavMenu} />
+                }
               </Menu>
             </Box>
           </Toolbar>

@@ -3,8 +3,7 @@ import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import Typography from '@mui/material/Typography'
+import NavBarPagesSmall from '../NavBarPagesSmall'
 import { pages } from '../../constants/index'
 
 const NavBarPagesIcon = ({ handleCloseNavMenu, handleOpenNavMenu, anchorElNav }) => {
@@ -42,11 +41,7 @@ const NavBarPagesIcon = ({ handleCloseNavMenu, handleOpenNavMenu, anchorElNav })
           display: { xs: 'block', md: 'none' }
         }}
       >
-        {pages.map((page) => (
-          <MenuItem key={page} onClick={handleCloseNavMenu}>
-            <Typography textAlign='center'>{page}</Typography>
-          </MenuItem>
-        ))}
+        <NavBarPagesSmall pages={pages} handleCloseNavMenu={handleCloseNavMenu} />
       </Menu>
     </Box>
   )

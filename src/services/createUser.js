@@ -9,7 +9,6 @@ export const createUser = ({ name, lastName, email, password, location }) => {
     password,
     location
   }
-
   return fetch(`${SERVER_URL}/users`, {
     method: 'POST',
     headers: {
@@ -30,14 +29,6 @@ export const SignInUser = ({ email, password }) => {
     .then(data => data.json())
     .then(result => {
       return result
-      /* return {
-        name: result[0].name,
-        lastName: result[0].lastName,
-        email: result[0].email,
-        location: result[0].location,
-        id: result[0].id,
-        profilePic: result[0].profilePic
-      } */
     })
     .catch(err => err)
 }
