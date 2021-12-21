@@ -1,13 +1,13 @@
 import { useContext, useEffect } from 'react'
 import { UserContext } from '../context/UserContext'
-import { RefreshAuth } from '../services/createUser'
+import { RefreshAuth } from '../services/refreshAuth'
 
 const useUserData = () => {
   const { userLog, setUserLog } = useContext(UserContext)
+  /* global sessionStorage */
   const id = sessionStorage.getItem('id')
 
   useEffect(() => {
-    /* global sessionStorage */
     if (id) {
       RefreshAuth({ id })
         .then(result => {

@@ -18,12 +18,29 @@ import { UserContext, userDataState } from '../../context/UserContext'
 import { emptyAvatarPic } from '../../utils/createAvatar'
 import { styleProps, stylePropsLink } from './styles'
 import UserMenu from '../UserMenu'
+import AlertDialog from '../BasicDialog'
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
   const { userLog, setUserLog } = useContext(UserContext)
   const navigate = useNavigate()
+  // Estado y funciones Modal
+  const [open, setOpen] = useState(false)
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
+  const handleLogOut = () => {
+    setUserLog(userDataState)
+    /* global sessionStorage */
+    sessionStorage.clear()
+    setOpen(false)
+    return navigate('/')
+  }
+  // ************************
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
@@ -46,10 +63,7 @@ const NavBar = () => {
       return navigate('/signup')
     }
     if (textOption === settings[3]) {
-      setUserLog(userDataState)
-      /* global sessionStorage */
-      sessionStorage.clear()
-      return navigate('/')
+      handleClickOpen()
     }
     if (textOption === settings[1]) {
       return navigate('/account')
@@ -132,6 +146,13 @@ const NavBar = () => {
           </Toolbar>
         </Container>
       </AppBar>
+      <AlertDialog
+        open={open}
+        setOpen={setOpen}
+        handleClickOpen={handleClickOpen}
+        handleClose={handleClose}
+        handleLogOut={handleLogOut}
+      />
     </Grid>
 
   )
