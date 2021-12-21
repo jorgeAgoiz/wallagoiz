@@ -5,8 +5,8 @@ import { styleProps } from './styles'
 
 const Account = () => {
   return (
-    <Grid item xs={12} sx={styleProps}>
-      <Typography variant='h3' component='div' gutterBottom>
+    <Grid item xs={12} md={11} sx={styleProps}>
+      <Typography variant='h4' component='div' gutterBottom>
         Cuenta
       </Typography>
       <AccountPersonal />

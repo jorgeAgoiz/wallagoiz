@@ -1,11 +1,18 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { Grid, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import SaveIcon from '@mui/icons-material/Save'
 import SubmitButton from '../SubmitButton'
-import TextFieldWrapper from '../TextFieldWrapper'
-import { styleProps, stylePropsFieldsBox } from './styles'
+import {
+  styleProps,
+  stylePropsFieldsBox,
+  stylePropsSelectInput,
+  stylePropsSubmitBtn
+}
+  from './styles'
+import DatePickerWrapper from '../DatePickerWrapper'
+import SelectInputWrapper from '../SelectInputWrapper'
 
 const AccountPersonal = () => {
   const {
@@ -13,7 +20,7 @@ const AccountPersonal = () => {
     handleSubmit,
     setError,
     formState: { errors, isSubmitting }
-  } = useForm({ defaultValues: { birthday: '', gender: '' } })
+  } = useForm({ defaultValues: { birthday: null, gender: '' } })
 
   const onSubmit = (data) => {
     console.log(data)
@@ -21,24 +28,24 @@ const AccountPersonal = () => {
 
   return (
     <Box component='form' onSubmit={handleSubmit(onSubmit)} sx={styleProps}>
-      <Typography variant='subtitle2' component='div'>
+      <Typography variant='subtitle1' component='div'>
         Información Personal
       </Typography>
       <Box sx={stylePropsFieldsBox}>
-        <TextFieldWrapper
+        <DatePickerWrapper
           control={control}
-          errors={errors}
           name='birthday'
           label='Fecha de Nacimiento'
         />
-        <TextFieldWrapper
+        <SelectInputWrapper
           control={control}
-          errors={errors}
-          name='birthday'
-          label='Fecha de Nacimiento'
+          name='gender'
+          label='Sexo'
+          stylePropsDp={stylePropsSelectInput}
         />
       </Box>
       <SubmitButton
+        styles={stylePropsSubmitBtn}
         isSubmitting={isSubmitting}
         Icon={SaveIcon}
         text='Guardar'
@@ -48,4 +55,6 @@ const AccountPersonal = () => {
 }
 
 export default AccountPersonal
-/* Sustituir los TextFields, por un Date Picker y por un selector input radio */
+/*  - Añadir la validación y gestión de errores
+    - Darle funcionalidad al onSubmit
+    */
