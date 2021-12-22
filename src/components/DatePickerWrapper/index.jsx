@@ -5,7 +5,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import DatePicker from '@mui/lab/DatePicker'
 import { Controller } from 'react-hook-form'
 
-const DatePickerWrapper = ({ control, name, label, stylePropsDp }) => {
+const DatePickerWrapper = ({ control, name, label, stylePropsDp, errors }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Controller
@@ -15,7 +15,15 @@ const DatePickerWrapper = ({ control, name, label, stylePropsDp }) => {
           <DatePicker
             label={label}
             value={field.value}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => {
+              return (
+                <TextField
+                  {...params}
+                  error={!!errors[name]}
+                  helperText={errors[name] ? errors[name]?.message : ''}
+                />
+              )
+            }}
             {...field}
           />
         )}

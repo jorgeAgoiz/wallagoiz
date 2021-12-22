@@ -9,9 +9,6 @@ export const updateUser = (id, fields) => {
     },
     body: JSON.stringify(fields)
   })
-    .then(data => {
-      console.log(data.status)
-      return data.json()
-    })
+    .then(data => data.json())
     .catch(err => err)
 }

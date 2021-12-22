@@ -14,29 +14,43 @@ import {
   from './styles'
 import DatePickerWrapper from '../DatePickerWrapper'
 import SelectInputWrapper from '../SelectInputWrapper'
-import { convertDate } from '../../utils/convertDate'
 import { updateUser } from '../../services/updateUser'
+import { useNavigate } from 'react-router-dom'
 
 const AccountPersonal = () => {
   const { userLog, setUserLog } = useContext(UserContext)
+  const navigate = useNavigate()
   const {
     control,
     handleSubmit,
     setError,
     formState: { errors, isSubmitting }
-  } = useForm({ defaultValues: { birthday: null, gender: '' } })
+  } = useForm({ defaultValues: { birthday: userLog.birthday, gender: userLog.gender } })
 
   const onSubmit = async (data) => {
-    const birthdayString = convertDate({ date: data.birthday })
     const update = {
-      birthday: birthdayString,
+      birthday: data.birthday,
       gender: data.gender
     }
     try {
-      const result = await updateUser(userLog.id, update)
-      console.log(result)
+      const userUpdated = await updateUser(userLog.id, update)
+      if (!userUpdated.id) {
+        setError('birthday', {
+          type: 'manual',
+          message: 'No se ha actualizado'
+        })
+        return setError('gender', {
+          type: 'manual',
+          message: 'No se ha actualizado'
+        })
+      }
+      delete userUpdated.password
+      setUserLog({ ...userLog, ...userUpdated })
     } catch (err) {
+      console.log('dentro del catch')
       console.log(err)
+      return navigate('/')
+      /* Gestionar este error */
     }
   }
 
@@ -50,12 +64,14 @@ const AccountPersonal = () => {
           control={control}
           name='birthday'
           label='Fecha de Nacimiento'
+          errors={errors}
         />
         <SelectInputWrapper
           control={control}
           name='gender'
           label='Sexo'
           stylePropsDp={stylePropsSelectInput}
+          errors={errors}
         />
       </Box>
       <SubmitButton
@@ -69,7 +85,6 @@ const AccountPersonal = () => {
 }
 
 export default AccountPersonal
-/*  - Añadir la validación y gestión de errores
-    - Darle funcionalidad al onSubmit
+/*   - Darle funcionalidad al onSubmit
     - Decidir que se hace con la respuesta del fetch, necesito el status
     */
