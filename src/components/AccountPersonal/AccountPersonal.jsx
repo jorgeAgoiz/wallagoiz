@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
+import { UserContext } from '../../context/UserContext'
 import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import SaveIcon from '@mui/icons-material/Save'
@@ -13,8 +14,11 @@ import {
   from './styles'
 import DatePickerWrapper from '../DatePickerWrapper'
 import SelectInputWrapper from '../SelectInputWrapper'
+import { convertDate } from '../../utils/convertDate'
+import { updateUser } from '../../services/updateUser'
 
 const AccountPersonal = () => {
+  const { userLog, setUserLog } = useContext(UserContext)
   const {
     control,
     handleSubmit,
@@ -22,8 +26,18 @@ const AccountPersonal = () => {
     formState: { errors, isSubmitting }
   } = useForm({ defaultValues: { birthday: null, gender: '' } })
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = async (data) => {
+    const birthdayString = convertDate({ date: data.birthday })
+    const update = {
+      birthday: birthdayString,
+      gender: data.gender
+    }
+    try {
+      const result = await updateUser(userLog.id, update)
+      console.log(result)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
@@ -57,4 +71,5 @@ const AccountPersonal = () => {
 export default AccountPersonal
 /*  - Añadir la validación y gestión de errores
     - Darle funcionalidad al onSubmit
+    - Decidir que se hace con la respuesta del fetch, necesito el status
     */

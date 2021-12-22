@@ -5,9 +5,10 @@ export const styleProps = {
   alignItems: 'center',
   gap: '1rem',
   padding: '0.4rem',
-  width: '100%',
+  width: '95%',
   backgroundColor: '#f9fbe7',
-  borderRadius: '2rem'
+  borderRadius: '1rem',
+  border: '1px solid black'
 }
 export const stylePropsFieldsBox = {
   display: 'flex',

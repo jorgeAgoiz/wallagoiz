@@ -9,7 +9,7 @@ const SelectInputWrapper = ({ control, name, label, stylePropsDp }) => {
       control={control}
       render={({ field }) =>
         <FormControl>
-          <InputLabel id='demo-simple-select-label'>Age</InputLabel>
+          <InputLabel id='demo-simple-select-label'>{label}</InputLabel>
           <Select
             labelId='demo-simple-select-label'
             id='demo-simple-select'

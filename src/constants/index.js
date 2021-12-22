@@ -19,12 +19,14 @@ export const INITIAL_FORM_STATE_SI = {
 }
 /* Entidad Usuario por defecto */
 export const defaultUser = {
+  id: null,
   name: null,
   lastName: null,
   email: null,
   location: null,
-  id: null,
   profilePic: null,
+  birthday: null,
+  gender: null,
   password: null
 }
 /* API URLS */
