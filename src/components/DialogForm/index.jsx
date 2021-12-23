@@ -1,43 +1,78 @@
 import * as React from 'react'
 import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
+import { Box } from '@mui/system'
+import SaveIcon from '@mui/icons-material/Save'
+import { useForm } from 'react-hook-form'
+import TextFieldWrapper from '../TextfieldWrapper'
+import SubmitButton from '../SubmitButton'
 
-const DialogForm = ({ open, handleClickOpen, handleClose }) => {
-  return (
-    <>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText>
-          <TextField
+const DialogForm = ({
+  open,
+  handleClose,
+  title,
+  textBtn,
+  fields,
+  defaultValues,
+  stylesForm,
+  stylesFieldsDiv
+}) => {
+  const {
+    control,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting }
+  } = useForm({ defaultValues: defaultValues/* , resolver: yupResolver(schemaSignUp) */ })
+
+  const onSubmit = (evt) => {
+    evt.preventDefault()
+    console.log('Hi There!!')
+    /* Aqui la lógica del formulario */
+  }
+
+  const fieldsToRender = () => {
+    return fields.map((field) => {
+      return (
+        <TextFieldWrapper
+            key={field.id}
+            control={control}
+            errors={errors}
+            name={field.name}
+            label={field.label}
             autoFocus
             margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
-        </DialogActions>
-      </Dialog>
+        />
+      )
+    }
+    )
+  }
+
+  return (
+    <>
+        <Dialog open={open} onClose={handleClose}>
+            <Box component='form' onSubmit={handleSubmit(onSubmit)} sx={stylesForm}>
+                <DialogTitle sx={{ textAlign: 'center' }}>{title}</DialogTitle>
+                <DialogContent sx={stylesFieldsDiv}>
+                      {
+                          fieldsToRender()
+                      }
+                </DialogContent>
+                <DialogActions>
+                    <SubmitButton isSubmitting={isSubmitting} text={textBtn} Icon={SaveIcon} />
+                    <Button onClick={handleClose} variant='contained' color='error'>Cancelar</Button>
+                </DialogActions>
+            </Box>
+        </Dialog>
     </>
   )
 }
 
 export default DialogForm
 
-/* La idea es hacer esto reutilizable pasandole tantos textflied
-como nos hagan falta y pasandole la función onSubmit. Asi no repetimos
-código con varios formularios. */
+/* - Darle funcionalidad al onSubmit
+   - Insertar los required
+   - Manejar los errores
+   */
