@@ -1,6 +1,7 @@
 import { Grid, Typography } from '@mui/material'
 import React from 'react'
-import AccountPersonal from '../../components/AccountPersonal/AccountPersonal'
+import AccountInfo from '../../components/AccountInfo'
+import AccountPersonal from '../../components/AccountPersonal'
 import { styleProps } from './styles'
 
 const Account = () => {
@@ -10,6 +11,7 @@ const Account = () => {
         Cuenta
       </Typography>
       <AccountPersonal />
+      <AccountInfo />
     </Grid>
   )
 }

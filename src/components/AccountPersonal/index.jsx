@@ -47,7 +47,6 @@ const AccountPersonal = () => {
       delete userUpdated.password
       setUserLog({ ...userLog, ...userUpdated })
     } catch (err) {
-      console.log('dentro del catch')
       console.log(err)
       return navigate('/')
       /* Gestionar este error */
@@ -85,6 +84,3 @@ const AccountPersonal = () => {
 }
 
 export default AccountPersonal
-/*   - Darle funcionalidad al onSubmit
-    - Decidir que se hace con la respuesta del fetch, necesito el status
-    */

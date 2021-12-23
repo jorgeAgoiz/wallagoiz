@@ -20,9 +20,3 @@ export const stylePropsFieldsBox = {
   padding: '1.2rem',
   gap: '0.8rem'
 }
-export const stylePropsSelectInput = {
-  minWidth: '15rem'
-}
-export const stylePropsSubmitBtn = {
-  marginBottom: '0.4rem'
-}
