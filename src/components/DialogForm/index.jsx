@@ -6,33 +6,24 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import { Box } from '@mui/system'
 import SaveIcon from '@mui/icons-material/Save'
-import { useForm } from 'react-hook-form'
 import TextFieldWrapper from '../TextfieldWrapper'
 import SubmitButton from '../SubmitButton'
 
 const DialogForm = ({
-  open,
-  handleClose,
-  title,
-  textBtn,
-  fields,
-  defaultValues,
-  stylesForm,
-  stylesFieldsDiv
+  open, // Estado de componente para mostrar o ocultar
+  handleClose, // Función para ocultar
+  title, // Titulo en el DialogTitle
+  textBtn, // Texto para el boton de envio
+  fields, // Array de objetos con los datos de los campos
+  stylesForm, // Estilos del formulario
+  stylesFieldsDiv, // Estilos del Div donde estan los TextFields
+  stylePropsTf, // Estilos para los TextFields
+  control, // useForm
+  handleSubmit, // useForm
+  errors, // useForm
+  isSubmitting, // useForm
+  onSubmit // Función para el envio del formulario
 }) => {
-  const {
-    control,
-    handleSubmit,
-    setError,
-    formState: { errors, isSubmitting }
-  } = useForm({ defaultValues: defaultValues/* , resolver: yupResolver(schemaSignUp) */ })
-
-  const onSubmit = (evt) => {
-    evt.preventDefault()
-    console.log('Hi There!!')
-    /* Aqui la lógica del formulario */
-  }
-
   const fieldsToRender = () => {
     return fields.map((field) => {
       return (
@@ -42,6 +33,7 @@ const DialogForm = ({
             errors={errors}
             name={field.name}
             label={field.label}
+            stylePropsTf={stylePropsTf}
             autoFocus
             margin="dense"
         />
@@ -71,8 +63,3 @@ const DialogForm = ({
 }
 
 export default DialogForm
-
-/* - Darle funcionalidad al onSubmit
-   - Insertar los required
-   - Manejar los errores
-   */

@@ -35,6 +35,9 @@ export const stylePropsFields = {
   justifyContent: 'center',
   alignItems: 'center',
   gap: '1.2rem',
-  height: '22vh'
+  height: '28vh'
 
+}
+export const stylePropsTf = {
+  height: '11vh'
 }

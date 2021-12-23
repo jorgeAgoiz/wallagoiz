@@ -29,5 +29,20 @@ export const defaultUser = {
   gender: null,
   password: null
 }
+
+/* Campos del formulario cambiar email */
+export const fieldsData = [
+  {
+    id: 1,
+    name: 'email',
+    label: 'Email'
+  },
+  {
+    id: 2,
+    name: 'confirmEmail',
+    label: 'Confirmar Email'
+  }
+]
+
 /* API URLS */
 export const SERVER_URL = 'http://localhost:3012'
