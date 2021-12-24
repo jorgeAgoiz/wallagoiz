@@ -78,6 +78,7 @@ const AccountPersonal = () => {
         isSubmitting={isSubmitting}
         Icon={SaveIcon}
         text='Guardar'
+        altText='Guardando'
       />
     </Box>
   )

@@ -1,4 +1,7 @@
-import * as React from 'react'
+import React, { useContext } from 'react'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
@@ -8,24 +11,62 @@ import { Box } from '@mui/system'
 import SaveIcon from '@mui/icons-material/Save'
 import TextFieldWrapper from '../TextfieldWrapper'
 import SubmitButton from '../SubmitButton'
+import { updateUser } from '../../services/updateUser'
+import { UserContext } from '../../context/UserContext'
+import { fieldsData } from '../../constants/index'
+import { stylePropsFields, stylePropsForm, stylePropsTf } from './styles'
 
-const DialogForm = ({
-  open, // Estado de componente para mostrar o ocultar
-  handleClose, // Función para ocultar
-  title, // Titulo en el DialogTitle
-  textBtn, // Texto para el boton de envio
-  fields, // Array de objetos con los datos de los campos
-  stylesForm, // Estilos del formulario
-  stylesFieldsDiv, // Estilos del Div donde estan los TextFields
-  stylePropsTf, // Estilos para los TextFields
-  control, // useForm
-  handleSubmit, // useForm
-  errors, // useForm
-  isSubmitting, // useForm
-  onSubmit // Función para el envio del formulario
-}) => {
+/* Valores por defecto del Form */
+const defaultValues = {
+  email: '',
+  confirmEmail: ''
+}
+/* Esquema de validación del Form */
+const schemaChangeEmail = yup.object({
+  email: yup.string().email().required('Requerido'),
+  confirmEmail: yup.string().email().required('Requerido')
+})
+
+const DialogFormEmail = ({ open, handleClose }) => {
+  /* Contexto */
+  const { userLog, setUserLog } = useContext(UserContext)
+
+  /* React-hook-form */
+  const {
+    control,
+    handleSubmit,
+    setError,
+    reset,
+    formState: { errors, isSubmitting }
+  } = useForm({ defaultValues, resolver: yupResolver(schemaChangeEmail) })
+
+  /* Función cerrar Dialog */
+  const handleCloseCancel = () => {
+    handleClose()
+    return reset(defaultValues)
+  }
+
+  /* Función envio formulario */
+  const onSubmit = async (data) => {
+    if (data.email !== data.confirmEmail) {
+      return setError('confirmEmail', {
+        type: 'manual',
+        message: 'El Email debe coincidir.'
+      })
+    }
+    const result = await updateUser(userLog.id, { email: data.email })
+    if (!result.id) {
+      return console.log('Something went wrong.')
+    }
+    delete result.password
+    result.logged = true
+    setUserLog({ ...result })
+    return handleCloseCancel()
+  }
+
+  /* Renderizado de los campos del formulario */
   const fieldsToRender = () => {
-    return fields.map((field) => {
+    return fieldsData.map((field) => {
       return (
         <TextFieldWrapper
             key={field.id}
@@ -45,16 +86,16 @@ const DialogForm = ({
   return (
     <>
         <Dialog open={open} onClose={handleClose}>
-            <Box component='form' onSubmit={handleSubmit(onSubmit)} sx={stylesForm}>
-                <DialogTitle sx={{ textAlign: 'center' }}>{title}</DialogTitle>
-                <DialogContent sx={stylesFieldsDiv}>
+            <Box component='form' onSubmit={handleSubmit(onSubmit)} sx={stylePropsForm}>
+                <DialogTitle sx={{ textAlign: 'center' }}>Cambiar Email</DialogTitle>
+                <DialogContent sx={stylePropsFields}>
                       {
                           fieldsToRender()
                       }
                 </DialogContent>
                 <DialogActions>
-                    <SubmitButton isSubmitting={isSubmitting} text={textBtn} Icon={SaveIcon} />
-                    <Button onClick={handleClose} variant='contained' color='error'>Cancelar</Button>
+                    <SubmitButton isSubmitting={isSubmitting} text='Modificar' altText='Guardando' Icon={SaveIcon} />
+                    <Button onClick={handleCloseCancel} variant='contained' color='error'>Cancelar</Button>
                 </DialogActions>
             </Box>
         </Dialog>
@@ -62,4 +103,4 @@ const DialogForm = ({
   )
 }
 
-export default DialogForm
+export default DialogFormEmail

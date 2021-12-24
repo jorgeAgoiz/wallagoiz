@@ -3,7 +3,7 @@ import { LoadingButton } from '@mui/lab'
 import { Button } from '@mui/material'
 import SaveIcon from '@mui/icons-material/Save'
 
-const SubmitButton = ({ isSubmitting, styles, Icon, text }) => {
+const SubmitButton = ({ isSubmitting, styles, Icon, text, altText }) => {
   return !isSubmitting
     ? (
       <Button
@@ -22,7 +22,7 @@ const SubmitButton = ({ isSubmitting, styles, Icon, text }) => {
         endIcon={<SaveIcon />}
         variant='outlined'
       >
-        Iniciando sesión
+        {altText}
       </LoadingButton>)
 }
 

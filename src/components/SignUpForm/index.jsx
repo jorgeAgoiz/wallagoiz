@@ -104,6 +104,7 @@ const SignUpForm = () => {
           isSubmitting={isSubmitting}
           Icon={SendIcon}
           text='Registrarse'
+          altText='Registrando'
         />
       </Box>
     </>

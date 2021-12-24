@@ -76,6 +76,7 @@ const SignInForm = () => {
           isSubmitting={isSubmitting}
           Icon={LoginIcon}
           text='Iniciar sesión'
+          altText='Iniciando'
         />
       </Box>
     </>
