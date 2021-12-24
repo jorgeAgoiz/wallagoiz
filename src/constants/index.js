@@ -31,7 +31,7 @@ export const defaultUser = {
 }
 
 /* Campos del formulario cambiar email */
-export const fieldsData = [
+export const fieldsDataEmail = [
   {
     id: 1,
     name: 'email',
@@ -41,6 +41,24 @@ export const fieldsData = [
     id: 2,
     name: 'confirmEmail',
     label: 'Confirmar Email'
+  }
+]
+/* Campos del formulario cambiar password */
+export const fieldsDataPassword = [
+  {
+    id: 1,
+    name: 'password',
+    label: 'Contraseña Actual'
+  },
+  {
+    id: 2,
+    name: 'newPassword',
+    label: 'Nueva Contraseña'
+  },
+  {
+    id: 3,
+    name: 'confirmNewPassword',
+    label: 'Confirmar Contraseña'
   }
 ]
 

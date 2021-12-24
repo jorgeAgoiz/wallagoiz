@@ -13,7 +13,7 @@ import TextFieldWrapper from '../TextfieldWrapper'
 import SubmitButton from '../SubmitButton'
 import { updateUser } from '../../services/updateUser'
 import { UserContext } from '../../context/UserContext'
-import { fieldsData } from '../../constants/index'
+import { fieldsDataEmail } from '../../constants/index'
 import { stylePropsFields, stylePropsForm, stylePropsTf } from './styles'
 
 /* Valores por defecto del Form */
@@ -66,7 +66,7 @@ const DialogFormEmail = ({ open, handleClose }) => {
 
   /* Renderizado de los campos del formulario */
   const fieldsToRender = () => {
-    return fieldsData.map((field) => {
+    return fieldsDataEmail.map((field) => {
       return (
         <TextFieldWrapper
             key={field.id}

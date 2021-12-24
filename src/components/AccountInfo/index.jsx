@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Box } from '@mui/system'
 import { Button, Typography } from '@mui/material'
 import { UserContext } from '../../context/UserContext'
-import DialogFormEmail from '../DialogForm'
+import DialogFormEmail from '../DialogFormEmail'
 import { styleProps, stylePropsFieldsBox } from './styles'
 
 const AccountInfo = () => {
