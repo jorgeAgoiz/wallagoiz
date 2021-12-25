@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
@@ -10,12 +11,12 @@ import DialogTitle from '@mui/material/DialogTitle'
 import { Box } from '@mui/system'
 import SaveIcon from '@mui/icons-material/Save'
 import SubmitButton from '../SubmitButton'
+import DialogFormFields from '../DialogFormFields'
 import { UserContext } from '../../context/UserContext'
 import { fieldsDataPassword } from '../../constants'
 import { stylePropsForm, stylePropsFields, stylePropsTf } from './styles'
 import { updateUser } from '../../services/updateUser'
 import { SignInUser } from '../../services/signInUser'
-import DialogFormFields from '../DialogFormFields'
 
 /* Valores por defecto del Form */
 const defaultValues = {
@@ -32,6 +33,7 @@ const schemaChangePassword = yup.object({
 
 const DialogFormPassword = ({ open, handleClose }) => {
   const { userLog } = useContext(UserContext)
+  const navigate = useNavigate()
   /* React-hook-form */
   const {
     control,
@@ -71,12 +73,15 @@ const DialogFormPassword = ({ open, handleClose }) => {
       }
       const updated = await updateUser(userLog.id, { password: data.newPassword })
       if (!updated.id) {
-        return console.log('Something went wrong.')
+        console.log('Something went wrong.')
+        handleClose()
+        return navigate('/error')
       }
       return handleCloseCancel()
     } catch (err) {
       console.log(err)
-      return handleClose()
+      handleClose()
+      return navigate('/error')
     }
   }
 

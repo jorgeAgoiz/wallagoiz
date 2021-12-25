@@ -10,11 +10,11 @@ import DialogTitle from '@mui/material/DialogTitle'
 import { Box } from '@mui/system'
 import SaveIcon from '@mui/icons-material/Save'
 import SubmitButton from '../SubmitButton'
+import DialogFormFields from '../DialogFormFields'
 import { updateUser } from '../../services/updateUser'
 import { UserContext } from '../../context/UserContext'
 import { fieldsDataEmail } from '../../constants/index'
 import { stylePropsFields, stylePropsForm, stylePropsTf } from './styles'
-import DialogFormFields from '../DialogFormFields'
 
 /* Valores por defecto del Form */
 const defaultValues = {
