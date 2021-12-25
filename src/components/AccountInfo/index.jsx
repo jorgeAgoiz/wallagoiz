@@ -8,7 +8,7 @@ import { styleProps, stylePropsFieldsBox } from './styles'
 const AccountInfo = () => {
   const { userLog } = useContext(UserContext)
   const [openEmail, setOpenEmail] = useState(false)
-  /* const [openPassword, setOpenPassword] = useState(false) */
+  const [openPassword, setOpenPassword] = useState(false)
 
   /* EMAIL */
   const handleClickOpenEmail = () => {
@@ -19,6 +19,14 @@ const AccountInfo = () => {
   }
   /* EMAIL */
 
+  /* PASSWORD */
+  const handleClickOpenPassword = () => {
+    setOpenPassword(true)
+  }
+  const handleClosePassword = () => {
+    setOpenPassword(false)
+  }
+  /* PASSWORD */
   return (
         <Box component='div' sx={styleProps}>
             <Typography variant='subtitle1' component='div'>
@@ -26,7 +34,7 @@ const AccountInfo = () => {
             </Typography>
             <Box sx={stylePropsFieldsBox}>
               <Button variant='outlined' onClick={handleClickOpenEmail} color='warning'>{userLog.email}</Button>
-              <Button variant='outlined' onClick={() => console.log('Cambiar contraseña')} color='warning'>Cambiar Contraseña</Button>
+              <Button variant='outlined' onClick={handleClickOpenPassword} color='warning'>Cambiar Contraseña</Button>
             </Box>
             <DialogFormEmail
               open={openEmail}
