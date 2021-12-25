@@ -9,12 +9,12 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import { Box } from '@mui/system'
 import SaveIcon from '@mui/icons-material/Save'
-import TextFieldWrapper from '../TextfieldWrapper'
 import SubmitButton from '../SubmitButton'
 import { updateUser } from '../../services/updateUser'
 import { UserContext } from '../../context/UserContext'
 import { fieldsDataEmail } from '../../constants/index'
 import { stylePropsFields, stylePropsForm, stylePropsTf } from './styles'
+import DialogFormFields from '../DialogFormFields'
 
 /* Valores por defecto del Form */
 const defaultValues = {
@@ -54,33 +54,19 @@ const DialogFormEmail = ({ open, handleClose }) => {
         message: 'El Email debe coincidir.'
       })
     }
-    const result = await updateUser(userLog.id, { email: data.email })
-    if (!result.id) {
-      return console.log('Something went wrong.')
+    try {
+      const result = await updateUser(userLog.id, { email: data.email })
+      if (!result.id) {
+        return console.log('Something went wrong.')
+      }
+      delete result.password
+      result.logged = true
+      setUserLog({ ...result })
+      return handleCloseCancel()
+    } catch (err) {
+      console.log(err)
+      return handleClose()
     }
-    delete result.password
-    result.logged = true
-    setUserLog({ ...result })
-    return handleCloseCancel()
-  }
-
-  /* Renderizado de los campos del formulario */
-  const fieldsToRender = () => {
-    return fieldsDataEmail.map((field) => {
-      return (
-        <TextFieldWrapper
-            key={field.id}
-            control={control}
-            errors={errors}
-            name={field.name}
-            label={field.label}
-            stylePropsTf={stylePropsTf}
-            autoFocus
-            margin="dense"
-        />
-      )
-    }
-    )
   }
 
   return (
@@ -89,9 +75,13 @@ const DialogFormEmail = ({ open, handleClose }) => {
             <Box component='form' onSubmit={handleSubmit(onSubmit)} sx={stylePropsForm}>
                 <DialogTitle sx={{ textAlign: 'center' }}>Cambiar Email</DialogTitle>
                 <DialogContent sx={stylePropsFields}>
-                      {
-                          fieldsToRender()
-                      }
+                  <DialogFormFields
+                          data={fieldsDataEmail}
+                          control={control}
+                          errors={errors}
+                          stylePropsTf={stylePropsTf}
+                          type='text'
+                      />
                 </DialogContent>
                 <DialogActions>
                     <SubmitButton isSubmitting={isSubmitting} text='Modificar' altText='Guardando' Icon={SaveIcon} />

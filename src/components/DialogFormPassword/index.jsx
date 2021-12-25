@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
@@ -9,11 +9,13 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import { Box } from '@mui/system'
 import SaveIcon from '@mui/icons-material/Save'
-import { fieldsDataPassword } from '../../constants'
-import TextFieldWrapper from '../TextfieldWrapper'
 import SubmitButton from '../SubmitButton'
+import { UserContext } from '../../context/UserContext'
+import { fieldsDataPassword } from '../../constants'
 import { stylePropsForm, stylePropsFields, stylePropsTf } from './styles'
-/* import { fieldsDataPassword } from '../../constants' */
+import { updateUser } from '../../services/updateUser'
+import { SignInUser } from '../../services/signInUser'
+import DialogFormFields from '../DialogFormFields'
 
 /* Valores por defecto del Form */
 const defaultValues = {
@@ -29,6 +31,7 @@ const schemaChangePassword = yup.object({
 })
 
 const DialogFormPassword = ({ open, handleClose }) => {
+  const { userLog } = useContext(UserContext)
   /* React-hook-form */
   const {
     control,
@@ -44,39 +47,52 @@ const DialogFormPassword = ({ open, handleClose }) => {
     return reset(defaultValues)
   }
 
-  const onSubmit = (data) => {
-    console.log(data)
-  }
-
-  /* Renderizado de los campos del formulario */
-  const fieldsToRender = () => {
-    return fieldsDataPassword.map((field) => {
-      return (
-        <TextFieldWrapper
-            key={field.id}
-            control={control}
-            errors={errors}
-            name={field.name}
-            label={field.label}
-            type='password'
-            stylePropsTf={stylePropsTf}
-            autoFocus
-            margin="dense"
-        />
-      )
+  /* Función envio formulario */
+  const onSubmit = async (data) => {
+    try {
+      const exists = await SignInUser({ email: userLog.email, password: data.password })
+      if (!exists[0]) {
+        return setError('password', {
+          type: 'manual',
+          message: 'Contraseña invalida.'
+        })
+      }
+      if (exists[0].password === data.newPassword) {
+        return setError('newPassword', {
+          type: 'manual',
+          message: 'Utilice una contraseña nueva.'
+        })
+      }
+      if (data.newPassword !== data.confirmNewPassword) {
+        return setError('confirmNewPassword', {
+          type: 'manual',
+          message: 'Las nuevas contraseñas deben coincidir.'
+        })
+      }
+      const updated = await updateUser(userLog.id, { password: data.newPassword })
+      if (!updated.id) {
+        return console.log('Something went wrong.')
+      }
+      return handleCloseCancel()
+    } catch (err) {
+      console.log(err)
+      return handleClose()
     }
-    )
   }
 
   return (
     <>
         <Dialog open={open} onClose={handleClose}>
             <Box component='form' onSubmit={handleSubmit(onSubmit)} sx={stylePropsForm}>
-                <DialogTitle sx={{ textAlign: 'center' }}>Cambiar Password</DialogTitle>
+                <DialogTitle sx={{ textAlign: 'center' }}>Cambiar Contraseña</DialogTitle>
                 <DialogContent sx={stylePropsFields}>
-                      {
-                          fieldsToRender()
-                      }
+                      <DialogFormFields
+                          data={fieldsDataPassword}
+                          control={control}
+                          errors={errors}
+                          stylePropsTf={stylePropsTf}
+                          type='password'
+                      />
                 </DialogContent>
                 <DialogActions>
                     <SubmitButton isSubmitting={isSubmitting} text='Modificar' altText='Guardando' Icon={SaveIcon} />
@@ -89,5 +105,3 @@ const DialogFormPassword = ({ open, handleClose }) => {
 }
 
 export default DialogFormPassword
-
-/* Continuaremos aqui estilando el Dialog formulario para cambiar el password */

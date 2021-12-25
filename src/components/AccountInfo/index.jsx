@@ -4,6 +4,7 @@ import { Button, Typography } from '@mui/material'
 import { UserContext } from '../../context/UserContext'
 import DialogFormEmail from '../DialogFormEmail'
 import { styleProps, stylePropsFieldsBox } from './styles'
+import DialogFormPassword from '../DialogFormPassword'
 
 const AccountInfo = () => {
   const { userLog } = useContext(UserContext)
@@ -39,6 +40,10 @@ const AccountInfo = () => {
             <DialogFormEmail
               open={openEmail}
               handleClose={handleCloseEmail}
+            />
+            <DialogFormPassword
+              open={openPassword}
+              handleClose={handleClosePassword}
             />
         </Box>
   )
