@@ -14,6 +14,7 @@ import NotFound from '../../pages/NotFound'
 import { styleProps } from './styles'
 import useUserData from '../../hooks/useUserData'
 import Account from '../../pages/Account'
+import Profile from '../../pages/Profile'
 
 function App () {
   const { userLog } = useUserData()
@@ -29,6 +30,7 @@ function App () {
           <Route exact path='/signup' element={<SignUp />} />
           <Route exact path='/signin' element={<SignIn />} />
           <Route exact path='/account' element={userLog.logged ? <Account /> : <Home />} />
+          <Route exact path='/profile' element={userLog.logged ? <Profile /> : <Home />} />
           <Route exact path='/error' element={<NotFound />} />
         </Routes>
       </Router>

@@ -68,6 +68,9 @@ const NavBar = () => {
     if (textOption === settings[1]) {
       return navigate('/account')
     }
+    if (textOption === settings[0]) {
+      return navigate('/profile')
+    }
     // *****************************************************
   }
   const handleCloseUserMenu = () => {
