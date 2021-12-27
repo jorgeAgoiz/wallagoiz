@@ -5,14 +5,14 @@ import { Box } from '@mui/system'
 import InputFileWrapper from '../InputFileWrapper'
 import { emptyAvatarPic } from '../../utils/createAvatar'
 import { UserContext } from '../../context/UserContext'
-import { styleProps, stylePropsProfilePic, stylePropsAvatarPic } from './styles'
+import { stylePropsProfilePic, stylePropsAvatarPic } from './styles'
 import avatarPic from '../../images/julian-wan.jpg'// Foto de perfil de prueba
 
 const ProfilePicture = () => {
   const { userLog } = useContext(UserContext)
 
   return (
-    <Box sx={styleProps}>
+    <>
       <Box sx={stylePropsProfilePic}>
         <Typography variant='subtitle1'>
           Foto de perfil
@@ -20,7 +20,7 @@ const ProfilePicture = () => {
         <Avatar alt='Profile Pic' src={avatarPic} sx={stylePropsAvatarPic}>{emptyAvatarPic(userLog)}</Avatar>
         <InputFileWrapper />
       </Box>
-    </Box>
+    </>
   )
 }
 

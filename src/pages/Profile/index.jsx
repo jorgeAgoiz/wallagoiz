@@ -1,7 +1,8 @@
-import { Grid, Typography } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import React from 'react'
+import ProfileData from '../../components/ProfileData'
 import ProfilePicture from '../../components/ProfilePicture'
-import { styleProps } from './styles'
+import { styleProps, stylePropsBoxInputs } from './styles'
 
 const Profile = () => {
   return (
@@ -9,7 +10,10 @@ const Profile = () => {
       <Typography variant='h4' textAlign='center' component='div'>
         Información de Perfil
       </Typography>
-      <ProfilePicture />
+      <Box sx={stylePropsBoxInputs}>
+        <ProfilePicture />
+        <ProfileData />
+      </Box>
     </Grid>
   )
 }
