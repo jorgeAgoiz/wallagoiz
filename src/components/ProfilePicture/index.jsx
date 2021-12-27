@@ -1,20 +1,25 @@
+import React, { useContext } from 'react'
 import { Typography } from '@mui/material'
+import Avatar from '@mui/material/Avatar'
 import { Box } from '@mui/system'
-import React from 'react'
-import { styleProps } from './styles'
+import InputFileWrapper from '../InputFileWrapper'
+import { emptyAvatarPic } from '../../utils/createAvatar'
+import { UserContext } from '../../context/UserContext'
+import { styleProps, stylePropsProfilePic, stylePropsAvatarPic } from './styles'
+import avatarPic from '../../images/julian-wan.jpg'// Foto de perfil de prueba
 
 const ProfilePicture = () => {
+  const { userLog } = useContext(UserContext)
+
   return (
     <Box sx={styleProps}>
-          <Typography variant='subtitle1'>
-              Cambiar foto de perfil
-      </Typography>
-      <Typography variant='subtitle1'>
-              Cambiar foto de perfil
-      </Typography>
-      <Typography variant='subtitle1'>
-              Cambiar foto de perfil
-          </Typography>
+      <Box sx={stylePropsProfilePic}>
+        <Typography variant='subtitle1'>
+          Foto de perfil
+        </Typography>
+        <Avatar alt='Profile Pic' src={avatarPic} sx={stylePropsAvatarPic}>{emptyAvatarPic(userLog)}</Avatar>
+        <InputFileWrapper />
+      </Box>
     </Box>
   )
 }

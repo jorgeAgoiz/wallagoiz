@@ -5,12 +5,12 @@ import { styleProps } from './styles'
 
 const Profile = () => {
   return (
-      <Grid item xs={12} md={11} sx={styleProps}>
-          <Typography variant='h4' textAlign='center' component='div'>
-              Información de Perfil
-          </Typography>
-            <ProfilePicture />
-        </Grid>
+    <Grid item xs={12} md={11} sx={styleProps}>
+      <Typography variant='h4' textAlign='center' component='div'>
+        Información de Perfil
+      </Typography>
+      <ProfilePicture />
+    </Grid>
   )
 }
 
