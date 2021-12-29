@@ -18,14 +18,16 @@ import { updateUser } from '../../services/updateUser'
 import { useNavigate } from 'react-router-dom'
 
 const AccountPersonal = () => {
-  const { userLog, setUserLog } = useContext(UserContext)
   const navigate = useNavigate()
+  const { userLog, setUserLog } = useContext(UserContext)
+  const INITIAL_VALUES = { birthday: userLog.birthday, gender: userLog.gender }
+
   const {
     control,
     handleSubmit,
     setError,
     formState: { errors, isSubmitting }
-  } = useForm({ defaultValues: { birthday: userLog.birthday, gender: userLog.gender } })
+  } = useForm({ defaultValues: INITIAL_VALUES })
 
   const onSubmit = async (data) => {
     const update = {
@@ -48,7 +50,7 @@ const AccountPersonal = () => {
       setUserLog({ ...userLog, ...userUpdated })
     } catch (err) {
       console.log(err)
-      return navigate('/')
+      return navigate('/error')
       /* Gestionar este error */
     }
   }

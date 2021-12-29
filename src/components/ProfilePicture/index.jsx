@@ -12,15 +12,13 @@ const ProfilePicture = () => {
   const { userLog } = useContext(UserContext)
 
   return (
-    <>
-      <Box sx={stylePropsProfilePic}>
-        <Typography variant='subtitle1'>
-          Foto de perfil
-        </Typography>
-        <Avatar alt='Profile Pic' src={avatarPic} sx={stylePropsAvatarPic}>{emptyAvatarPic(userLog)}</Avatar>
-        <InputFileWrapper />
-      </Box>
-    </>
+    <Box sx={stylePropsProfilePic}>
+      <Typography variant='subtitle1'>
+        Foto de perfil
+      </Typography>
+      <Avatar alt='Profile Pic' src={avatarPic} sx={stylePropsAvatarPic}>{emptyAvatarPic(userLog)}</Avatar>
+      <InputFileWrapper />
+    </Box>
   )
 }
 

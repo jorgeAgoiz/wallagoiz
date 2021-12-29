@@ -10,6 +10,7 @@ export const stylePropsBoxInputs = {
   flexDirection: 'row',
   justifyContent: 'space-evenly',
   alignItems: 'center',
+  flexWrap: 'wrap',
   width: '95%',
   backgroundColor: '#f9fbe7',
   gap: '1.2rem',

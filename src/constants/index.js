@@ -17,6 +17,13 @@ export const INITIAL_FORM_STATE_SI = {
   email: '',
   password: ''
 }
+/* Profile Form */
+export const INITIAL_FORM_STATE_PROF = {
+  name: '',
+  lastName: '',
+  location: ''
+}
+
 /* Entidad Usuario por defecto */
 export const defaultUser = {
   id: null,
