@@ -10,7 +10,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { UserContext } from '../../context/UserContext'
 import { styleProps, stylePropsCardActions } from './styles'
 
-const PreviewCard = () => {
+const PreviewCard = ({ picture, title, price }) => {
   const { userLog: { logged } } = useContext(UserContext)
   const favorite = false// En función de si es favorito para el usuario
 
@@ -18,16 +18,16 @@ const PreviewCard = () => {
     <Card sx={styleProps}>
       <CardMedia
         component='img'
-        height='180'
-        image='https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/7b5b7e7b-002f-4b66-9345-c222f7d18536/elite-tournament-basketball-size-6-and-7-76nlqt.png'
+        height='160'
+        image={picture}
         alt='Basketball baloon'
       />
       <CardContent>
-        <Typography gutterBottom variant='h5' component='div'>
-          Basketball baloon
+        <Typography gutterBottom variant='subtitle1' component='div'>
+          {title}
         </Typography>
-        <Typography variant='body2' color='text.secondary'>
-          43 Euros
+        <Typography variant='h6' color='black'>
+          {price} Euros
         </Typography>
       </CardContent>
       <CardActions sx={stylePropsCardActions}>

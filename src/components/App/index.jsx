@@ -2,7 +2,8 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
+  Navigate
 } from 'react-router-dom'
 import { Grid } from '@mui/material'
 import NavBar from '../NavBar'
@@ -15,6 +16,7 @@ import { styleProps } from './styles'
 import useUserData from '../../hooks/useUserData'
 import Account from '../../pages/Account'
 import Profile from '../../pages/Profile'
+import UploadArticle from '../../pages/UploadArticle'
 
 function App () {
   const { userLog } = useUserData()
@@ -29,8 +31,9 @@ function App () {
           <Route exact path='/' element={<Home />} />
           <Route exact path='/signup' element={<SignUp />} />
           <Route exact path='/signin' element={<SignIn />} />
-          <Route exact path='/account' element={userLog.logged ? <Account /> : <Home />} />
-          <Route exact path='/profile' element={userLog.logged ? <Profile /> : <Home />} />
+          <Route exact path='/account' element={userLog.logged ? <Account /> : <Navigate to='/' />} />
+          <Route exact path='/profile' element={userLog.logged ? <Profile /> : <Navigate to='/' />} />
+          <Route exact path='/upload' element={userLog.logged ? <UploadArticle /> : <Navigate to='/' />} />
           <Route exact path='/error' element={<NotFound />} />
         </Routes>
       </Router>

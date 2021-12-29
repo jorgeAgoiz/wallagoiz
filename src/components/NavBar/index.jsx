@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip'
 import EnhancedEncryptionRoundedIcon from '@mui/icons-material/EnhancedEncryptionRounded'
 import NavBarPagesIcon from '../NavBarPagesIcon'
 import NavBarPagesExpand from '../NavBarPagesExpand'
-import { settings, signIn } from '../../constants/index'
+import { settings, signIn, pages } from '../../constants/index'
 import { UserContext, userDataState } from '../../context/UserContext'
 import { emptyAvatarPic } from '../../utils/createAvatar'
 import { styleProps, stylePropsLink } from './styles'
@@ -55,7 +55,11 @@ const NavBar = () => {
       - Extraer esta lógica en una función aislada.
       - Hacer aqui la limpieza del storage.
     */
+
     const textOption = event.target.innerText
+    if (textOption === pages[1].toUpperCase()) {
+      return navigate('/upload')
+    }
     if (textOption === signIn[0]) {
       return navigate('/signin')
     }

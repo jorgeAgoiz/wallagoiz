@@ -1,9 +1,13 @@
-import { useSWR } from 'swr'
+import useSWR from 'swr'
 
-export const useQuerySwr = (queryKey, callbackFunc) => {
+export const useArticlesSwr = (queryKey, callbackFunc) => {
   const { data, error } = useSWR(queryKey, callbackFunc)
 
-  return { data, error }
+  return {
+    articles: data,
+    isLoading: !error && !data,
+    isError: error
+  }
 }
 /* Hook reutilizable para hacer las llamadas a los datos.
 - Por defecto la key se pasa al fetcher como argumento
