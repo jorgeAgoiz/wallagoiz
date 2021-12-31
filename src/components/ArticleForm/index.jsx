@@ -8,7 +8,8 @@ import TextFieldWrapper from '../TextfieldWrapper'
 import SubmitButton from '../SubmitButton'
 import { InputAdornment } from '@mui/material'
 import TextAreaWrapper from '../TextAreaWrapper'
-import { styleProps } from './styles'
+import { styleProps, styleTextArea } from './styles'
+import SelectInputWrapper from '../SelectInputWrapper'
 
 const INITIAL_VALUES_ARTICLE = {
   title: '',
@@ -32,42 +33,53 @@ const ArticleForm = () => {
     setError,
     formState: { errors, isSubmitting }
   } = useForm({ defaultValues: INITIAL_VALUES_ARTICLE, resolver: yupResolver(schemaArticle) })
-
+  console.log(errors)
   const onSubmit = (data) => {
     console.log(data)
   }
 
   return (
     <Box component='form' onSubmit={handleSubmit(onSubmit)} sx={styleProps}>
-      <TextFieldWrapper
+      <Box>
+        <TextFieldWrapper
+          control={control}
+          errors={errors}
+          name='title'
+          label='Titulo'
+        />
+        <TextFieldWrapper
+          control={control}
+          errors={errors}
+          name='price'
+          label='Precio'
+          InputProps={{
+            endAdornment: <InputAdornment position='end'>€</InputAdornment>
+          }}
+        />
+      </Box>
+      {/* Esto sera un SelectInputWrapper */}
+      {/* <TextFieldWrapper
         control={control}
         errors={errors}
-        name='title'
-        label='Titulo'
-      />
-      {/* Esto tiene que ser un text area, mejorarlo y estilarlo */}
-      <TextAreaWrapper
-        control={control}
-        errors={errors}
-        name='description'
-        label='Descripción'
-        defaultValue='Probando probando'
-      />
-      <TextFieldWrapper
-        control={control}
-        errors={errors}
-        name='price'
-        label='Precio'
-        InputProps={{
-          endAdornment: <InputAdornment position='end'>€</InputAdornment>
-        }}
-      />
-      <TextFieldWrapper
+        name='category'
+        label='Categoría'
+      /> */}
+      {/* Hacer este componente reutilizable, he creado una constante
+      con todos los valores necesarios */}
+      <SelectInputWrapper
         control={control}
         errors={errors}
         name='category'
         label='Categoría'
       />
+      <TextAreaWrapper
+        control={control}
+        errors={errors}
+        name='description'
+        label='Descripción'
+        stylePropsTf={styleTextArea}
+      />
+
       {/* Esto tiene que ser con el componente InputFileWrapper */}
       <TextFieldWrapper
         control={control}

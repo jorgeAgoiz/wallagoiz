@@ -2,6 +2,92 @@
 export const pages = ['Favoritos', 'Súbelo', 'Buzón']
 export const settings = ['Perfil', 'Cuenta', 'Tus productos', 'Cerrar Sesión']
 export const signIn = ['Iniciar sesión', 'Registrarse']
+export const articlesCategory = [
+  {
+    name: 'cars',
+    label: 'Coches'
+  },
+  {
+    name: 'motorbikes',
+    label: 'Motos'
+  },
+  {
+    name: 'motor accesories',
+    label: 'Motor y Accesorios'
+  },
+  {
+    name: 'fashion and accesories',
+    label: 'Moda y Accesorios'
+  },
+  {
+    name: 'real estate',
+    label: 'Inmobiliaria'
+  },
+  {
+    name: 'tv, audio and photo',
+    label: 'TV, Audio y Foto'
+  },
+  {
+    name: 'mobile phones',
+    label: 'Móviles y Telefonía'
+  },
+  {
+    name: 'computer science and electronics',
+    label: 'Informática y Electrónica'
+  },
+  {
+    name: 'sports and hobbies',
+    label: 'Deporte y Ocio'
+  },
+  {
+    name: 'Bikes',
+    label: 'Bicicletas'
+  },
+  {
+    name: 'consoles and video games',
+    label: 'Consolas y Videojuegos'
+  },
+  {
+    name: 'home and garden',
+    label: 'Hogar y Jardín'
+  },
+  {
+    name: 'home appliances',
+    label: 'Electrodomésticos'
+  },
+  {
+    name: 'cinema books and music',
+    label: 'Cine, Libros y Música'
+  },
+  {
+    name: 'children and babies',
+    label: 'Niños y Bebés'
+  },
+  {
+    name: 'collecting',
+    label: 'Coleccionismo'
+  },
+  {
+    name: 'construction materials',
+    label: 'Materiales de Construcción'
+  },
+  {
+    name: 'industry and agriculture',
+    label: 'Industria y Agricultura'
+  },
+  {
+    name: 'jobs',
+    label: 'Empleo'
+  },
+  {
+    name: 'services',
+    label: 'Servicios'
+  },
+  {
+    name: 'others',
+    label: 'Otros'
+  }
+]
 
 /* Sign Up Form */
 export const INITIAL_FORM_STATE_SU = {
