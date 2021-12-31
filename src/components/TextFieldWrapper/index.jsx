@@ -2,7 +2,7 @@ import React from 'react'
 import { TextField } from '@mui/material'
 import { Controller } from 'react-hook-form'
 
-const TextFieldWrapper = ({ control, errors, name, label, type, stylePropsTf }) => {
+const TextFieldWrapper = ({ control, errors, name, label, type, stylePropsTf, ...otherProps }) => {
   return (
     <>
       <Controller
@@ -18,6 +18,7 @@ const TextFieldWrapper = ({ control, errors, name, label, type, stylePropsTf }) 
             color='success'
             error={!!errors[name]}
             helperText={errors[name] ? errors[name]?.message : ''}
+            {...otherProps}
             {...field}
           />
         )}

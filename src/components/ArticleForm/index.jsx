@@ -6,6 +6,9 @@ import { Box } from '@mui/system'
 import SendIcon from '@mui/icons-material/Send'
 import TextFieldWrapper from '../TextfieldWrapper'
 import SubmitButton from '../SubmitButton'
+import { InputAdornment } from '@mui/material'
+import TextAreaWrapper from '../TextAreaWrapper'
+import { styleProps } from './styles'
 
 const INITIAL_VALUES_ARTICLE = {
   title: '',
@@ -17,7 +20,7 @@ const INITIAL_VALUES_ARTICLE = {
 const schemaArticle = yup.object({
   title: yup.string().required('Requerido'),
   description: yup.string().required('Requerido'),
-  price: yup.number().required('Requerido'),
+  price: yup.number().min(1, 'Inserte un precio válido.').required('Requerido'),
   category: yup.string().required('Requerido'),
   picture: yup.string().required('Requerido')
 })
@@ -35,26 +38,29 @@ const ArticleForm = () => {
   }
 
   return (
-    <Box component='form' onSubmit={handleSubmit(onSubmit)}>
+    <Box component='form' onSubmit={handleSubmit(onSubmit)} sx={styleProps}>
       <TextFieldWrapper
         control={control}
         errors={errors}
         name='title'
         label='Titulo'
       />
-      {/* Esto tiene que ser un text area */}
-      <TextFieldWrapper
+      {/* Esto tiene que ser un text area, mejorarlo y estilarlo */}
+      <TextAreaWrapper
         control={control}
         errors={errors}
         name='description'
         label='Descripción'
+        defaultValue='Probando probando'
       />
-      {/* Esto tiene que ser type number */}
       <TextFieldWrapper
         control={control}
         errors={errors}
         name='price'
         label='Precio'
+        InputProps={{
+          endAdornment: <InputAdornment position='end'>€</InputAdornment>
+        }}
       />
       <TextFieldWrapper
         control={control}
