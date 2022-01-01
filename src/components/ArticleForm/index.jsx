@@ -8,7 +8,8 @@ import TextFieldWrapper from '../TextfieldWrapper'
 import SubmitButton from '../SubmitButton'
 import { InputAdornment } from '@mui/material'
 import TextAreaWrapper from '../TextAreaWrapper'
-import { styleProps, styleTextArea } from './styles'
+import { styleProps, styleSelectInput, styleTextArea, styleTitlePriceBox } from './styles'
+import { articlesCategory } from '../../constants/index'
 import SelectInputWrapper from '../SelectInputWrapper'
 
 const INITIAL_VALUES_ARTICLE = {
@@ -33,14 +34,16 @@ const ArticleForm = () => {
     setError,
     formState: { errors, isSubmitting }
   } = useForm({ defaultValues: INITIAL_VALUES_ARTICLE, resolver: yupResolver(schemaArticle) })
+
   console.log(errors)
+
   const onSubmit = (data) => {
     console.log(data)
   }
 
   return (
     <Box component='form' onSubmit={handleSubmit(onSubmit)} sx={styleProps}>
-      <Box>
+      <Box sx={styleTitlePriceBox}>
         <TextFieldWrapper
           control={control}
           errors={errors}
@@ -57,20 +60,13 @@ const ArticleForm = () => {
           }}
         />
       </Box>
-      {/* Esto sera un SelectInputWrapper */}
-      {/* <TextFieldWrapper
-        control={control}
-        errors={errors}
-        name='category'
-        label='Categoría'
-      /> */}
-      {/* Hacer este componente reutilizable, he creado una constante
-      con todos los valores necesarios */}
       <SelectInputWrapper
         control={control}
         errors={errors}
         name='category'
         label='Categoría'
+        items={articlesCategory}
+        stylePropsDp={styleSelectInput}
       />
       <TextAreaWrapper
         control={control}
@@ -100,4 +96,4 @@ const ArticleForm = () => {
 
 export default ArticleForm
 
-/* Seleccionar los inputs correctos para cada campo y estilar la Grid */
+/* Seguimos estilando los campos */

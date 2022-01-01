@@ -16,6 +16,7 @@ import DatePickerWrapper from '../DatePickerWrapper'
 import SelectInputWrapper from '../SelectInputWrapper'
 import { updateUser } from '../../services/updateUser'
 import { useNavigate } from 'react-router-dom'
+import { options } from '../../constants'
 
 const AccountPersonal = () => {
   const navigate = useNavigate()
@@ -73,6 +74,7 @@ const AccountPersonal = () => {
           label='Sexo'
           stylePropsDp={stylePropsSelectInput}
           errors={errors}
+          items={options}
         />
       </Box>
       <SubmitButton

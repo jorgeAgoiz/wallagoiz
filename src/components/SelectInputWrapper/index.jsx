@@ -2,7 +2,7 @@ import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/
 import React from 'react'
 import { Controller } from 'react-hook-form'
 
-const SelectInputWrapper = ({ control, name, label, stylePropsDp, errors }) => {
+const SelectInputWrapper = ({ control, name, label, stylePropsDp, errors, items }) => {
   return (
     <Controller
       name={name}
@@ -18,8 +18,11 @@ const SelectInputWrapper = ({ control, name, label, stylePropsDp, errors }) => {
             sx={stylePropsDp}
             {...field}
           >
-            <MenuItem value='male'>Hombre</MenuItem>
-            <MenuItem value='female'>Mujer</MenuItem>
+            {
+              items.map((item, index) => {
+                return <MenuItem key={index} value={item.name}>{item.label}</MenuItem>
+              })
+            }
           </Select>
           <FormHelperText>{errors[name] ? errors[name]?.message : ''}</FormHelperText>
         </FormControl>}

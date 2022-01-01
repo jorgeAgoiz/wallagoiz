@@ -2,6 +2,16 @@
 export const pages = ['Favoritos', 'Súbelo', 'Buzón']
 export const settings = ['Perfil', 'Cuenta', 'Tus productos', 'Cerrar Sesión']
 export const signIn = ['Iniciar sesión', 'Registrarse']
+export const options = [
+  {
+    name: 'male',
+    label: 'Hombre'
+  },
+  {
+    name: 'female',
+    label: 'Mujer'
+  }
+]
 export const articlesCategory = [
   {
     name: 'cars',
