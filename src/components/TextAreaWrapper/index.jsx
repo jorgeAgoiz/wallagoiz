@@ -18,7 +18,6 @@ const TextAreaWrapper = ({
         control={control}
         render={({ field }) => (
           <TextareaAutosize
-            aria-label={label}
             placeholder='Descripción del producto...'
             style={stylePropsTf}
             error={!!errors[name]}

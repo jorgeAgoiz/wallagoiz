@@ -29,23 +29,23 @@ const AccountInfo = () => {
   }
   /* PASSWORD */
   return (
-        <Box component='div' sx={styleProps}>
-            <Typography variant='subtitle1' component='div'>
-                Información Cuenta
-            </Typography>
-            <Box sx={stylePropsFieldsBox}>
-              <Button variant='outlined' onClick={handleClickOpenEmail} color='warning'>{userLog.email}</Button>
-              <Button variant='outlined' onClick={handleClickOpenPassword} color='warning'>Cambiar Contraseña</Button>
-            </Box>
-            <DialogFormEmail
-              open={openEmail}
-              handleClose={handleCloseEmail}
-            />
-            <DialogFormPassword
-              open={openPassword}
-              handleClose={handleClosePassword}
-            />
-        </Box>
+    <Box component='div' sx={styleProps}>
+      <Typography variant='subtitle1' component='div'>
+        Información Cuenta
+      </Typography>
+      <Box sx={stylePropsFieldsBox}>
+        <Button variant='outlined' onClick={handleClickOpenEmail} color='warning'>{userLog.email}</Button>
+        <Button variant='outlined' onClick={handleClickOpenPassword} color='warning'>Cambiar Contraseña</Button>
+      </Box>
+      <DialogFormEmail
+        open={openEmail}
+        handleClose={handleCloseEmail}
+      />
+      <DialogFormPassword
+        open={openPassword}
+        handleClose={handleClosePassword}
+      />
+    </Box>
   )
 }
 

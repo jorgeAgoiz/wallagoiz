@@ -17,9 +17,11 @@ const ProfilePicture = () => {
         Foto de perfil
       </Typography>
       <Avatar alt='Profile Pic' src={avatarPic} sx={stylePropsAvatarPic}>{emptyAvatarPic(userLog)}</Avatar>
-      <InputFileWrapper />
+      <InputFileWrapper text='cambiar' />
     </Box>
   )
 }
 
 export default ProfilePicture
+
+/* Aqui hay que traabajar bastante para darle funcionalidad */

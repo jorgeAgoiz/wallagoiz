@@ -8,9 +8,19 @@ import TextFieldWrapper from '../TextfieldWrapper'
 import SubmitButton from '../SubmitButton'
 import { InputAdornment } from '@mui/material'
 import TextAreaWrapper from '../TextAreaWrapper'
-import { styleProps, styleSelectInput, styleTextArea, styleTitlePriceBox } from './styles'
+import {
+  styleProps,
+  styleSelectInput,
+  styleTextArea,
+  styleTitlePriceBox,
+  styleSelectBox,
+  styleTextAreaBox,
+  stylePropsButton,
+  styleInputFile
+} from './styles'
 import { articlesCategory } from '../../constants/index'
 import SelectInputWrapper from '../SelectInputWrapper'
+import InputFileWrapper from '../InputFileWrapper'
 
 const INITIAL_VALUES_ARTICLE = {
   title: '',
@@ -36,6 +46,8 @@ const ArticleForm = () => {
   } = useForm({ defaultValues: INITIAL_VALUES_ARTICLE, resolver: yupResolver(schemaArticle) })
 
   console.log(errors)
+  /* Establecer un manejo de errores adecuado para la descripción y el
+  input file */
 
   const onSubmit = (data) => {
     console.log(data)
@@ -49,42 +61,47 @@ const ArticleForm = () => {
           errors={errors}
           name='title'
           label='Titulo'
+          stylePropsTf={{ height: '10vh' }}
         />
         <TextFieldWrapper
           control={control}
           errors={errors}
           name='price'
           label='Precio'
+          stylePropsTf={{ height: '10vh' }}
           InputProps={{
             endAdornment: <InputAdornment position='end'>€</InputAdornment>
           }}
         />
       </Box>
-      <SelectInputWrapper
-        control={control}
-        errors={errors}
-        name='category'
-        label='Categoría'
-        items={articlesCategory}
-        stylePropsDp={styleSelectInput}
-      />
-      <TextAreaWrapper
-        control={control}
-        errors={errors}
-        name='description'
-        label='Descripción'
-        stylePropsTf={styleTextArea}
-      />
-
-      {/* Esto tiene que ser con el componente InputFileWrapper */}
-      <TextFieldWrapper
+      <Box sx={styleSelectBox}>
+        <SelectInputWrapper
+          control={control}
+          errors={errors}
+          name='category'
+          label='Categoría'
+          items={articlesCategory}
+          stylePropsDp={styleSelectInput}
+        />
+      </Box>
+      <Box sx={styleTextAreaBox}>
+        <TextAreaWrapper
+          control={control}
+          errors={errors}
+          name='description'
+          label='Descripción'
+          stylePropsTf={styleTextArea}
+        />
+      </Box>
+      {/* <TextFieldWrapper
         control={control}
         errors={errors}
         name='picture'
         label='Fotografía'
-      />
+      /> */}
+      <InputFileWrapper text='subir foto' styles={styleInputFile} />
       <SubmitButton
-          /* styles={stylePropsButton} */
+        styles={stylePropsButton}
         isSubmitting={isSubmitting}
         Icon={SendIcon}
         text='Subir Artículo'
