@@ -21,7 +21,7 @@ const TextAreaWrapper = ({
             placeholder='Descripción del producto...'
             style={stylePropsTf}
             error={!!errors[name]}
-            helperText={errors[name] ? errors[name]?.message : ''}
+            helpertext={errors[name] ? errors[name]?.message : ''}
             {...field}
           />
         )}
@@ -32,3 +32,13 @@ const TextAreaWrapper = ({
 }
 
 export default TextAreaWrapper
+
+/*
+Solucionar Error:
+
+react_devtools_backend.js:4045 Warning: Received `false` for a non-boolean attribute `error`.
+
+If you want to write it to the DOM, pass a string instead: error="false" or error={value.toString()}.
+
+If you used to conditionally omit it with error={condition && value}, pass error={condition ? value : undefined} instead.
+*/

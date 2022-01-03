@@ -40,23 +40,19 @@ const schemaArticle = yup.object({
 const ArticleForm = () => {
   const {
     control,
-    register,
     handleSubmit,
     setError,
     formState: { errors, isSubmitting }
   } = useForm({ defaultValues: INITIAL_VALUES_ARTICLE, resolver: yupResolver(schemaArticle) })
 
+  /* Temporal, pensar en el manejo de errores */
   if (errors) {
     console.log(errors)
   }
 
-  /* Establecer un manejo de errores adecuado para la descripción y el
-  input file */
-
-  const onSubmit = (data, e) => {
-    console.log(e)
-    data.picture = e.target[8].value
+  const onSubmit = (data) => {
     console.log(data)
+    /* Aqui implementaremos la lógica para mandar el nuevo articulo al back */
   }
 
   return (
@@ -99,15 +95,10 @@ const ArticleForm = () => {
           stylePropsTf={styleTextArea}
         />
       </Box>
-      {/* <TextFieldWrapper
-        control={control}
-        errors={errors}
-        name='picture'
-        label='Fotografía'
-      /> */}
       <InputFileWrapper
         control={control}
         errors={errors}
+        name='picture'
         text='subir foto'
         styles={styleInputFile}
       />
@@ -123,6 +114,3 @@ const ArticleForm = () => {
 }
 
 export default ArticleForm
-
-/* Seguimos estilando los campos */
-/* Quiza el input file lo debamos hacer con el register de react hook form */
