@@ -4,7 +4,7 @@ import PreviewCard from '../../components/PreviewCard'
 import { getArticles } from '../../services/getArticles'
 import { styleProps } from './styles'
 import { useNavigate } from 'react-router-dom'
-import { useArticlesSwr } from '../../hooks/useQuerySwr'
+import { useArticlesSwr } from '../../hooks/useArticlesSwr'
 
 const Home = () => {
   const navigate = useNavigate()

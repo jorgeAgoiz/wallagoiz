@@ -31,19 +31,15 @@ export const styleSelectInput = {
 }
 export const styleTextAreaBox = {
   width: '100%',
-  height: '19vh',
+  height: '18vh',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'start',
   alignItems: 'center'
 }
 export const styleTextArea = {
-  resize: 'none',
   width: '90%',
-  height: '12vh',
-  border: '1px solid black',
-  padding: '0.4rem',
-  backgroundColor: 'transparent'
+  height: '18vh'
 }
 export const styleInputFile = {
   margin: '0.8rem'

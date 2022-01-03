@@ -21,6 +21,7 @@ import {
 import { articlesCategory } from '../../constants/index'
 import SelectInputWrapper from '../SelectInputWrapper'
 import InputFileWrapper from '../InputFileWrapper'
+import { useArticlesSwr } from '../../hooks/useArticlesSwr'
 
 const INITIAL_VALUES_ARTICLE = {
   title: '',
@@ -41,18 +42,16 @@ const ArticleForm = () => {
   const {
     control,
     handleSubmit,
-    setError,
     formState: { errors, isSubmitting }
   } = useForm({ defaultValues: INITIAL_VALUES_ARTICLE, resolver: yupResolver(schemaArticle) })
 
-  /* Temporal, pensar en el manejo de errores */
-  if (errors) {
-    console.log(errors)
-  }
-
   const onSubmit = (data) => {
+    if (data.picture) {
+      data.picture = 'https://images.unsplash.com/photo-1494253109108-2e30c049369b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
+    }
     console.log(data)
-    /* Aqui implementaremos la lógica para mandar el nuevo articulo al back */
+    /* Aqui implementaremos la lógica para mandar el nuevo articulo al back,
+    usaremos swr en vez de contexto para los articulos. */
   }
 
   return (
@@ -87,12 +86,14 @@ const ArticleForm = () => {
         />
       </Box>
       <Box sx={styleTextAreaBox}>
-        <TextAreaWrapper
+        <TextFieldWrapper
           control={control}
           errors={errors}
           name='description'
           label='Descripción'
           stylePropsTf={styleTextArea}
+          rows={4}
+          multiline
         />
       </Box>
       <InputFileWrapper
