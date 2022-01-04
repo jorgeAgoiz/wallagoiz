@@ -1,7 +1,8 @@
 import useSWR from 'swr'
+import { fetcher } from '../constants/index'
 
-export const useArticlesSwr = (queryKey, callbackFunc) => {
-  const { data, error, mutate } = useSWR(queryKey, callbackFunc)
+export const useArticlesSwr = () => {
+  const { data, error, mutate } = useSWR('http://localhost:3012/articles', fetcher)
 
   return {
     articles: data,

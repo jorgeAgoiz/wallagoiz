@@ -9,6 +9,7 @@ import { useArticlesSwr } from '../../hooks/useArticlesSwr'
 const Home = () => {
   const navigate = useNavigate()
   const { articles, isLoading, isError } = useArticlesSwr('/articles', getArticles)
+  console.log(articles)
 
   if (isLoading) return <div>Cargando...</div>
   if (isError) return navigate('/error')

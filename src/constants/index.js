@@ -165,5 +165,9 @@ export const fieldsDataPassword = [
   }
 ]
 
+/* Fetcher para SWR */
+/* global fetch */
+export const fetcher = (...args) => fetch(...args).then(res => res.json())
+
 /* API URLS */
 export const SERVER_URL = 'http://localhost:3012'
