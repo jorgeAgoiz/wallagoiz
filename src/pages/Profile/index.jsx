@@ -1,6 +1,6 @@
 import React from 'react'
-import { Box, Grid, Typography } from '@mui/material'
 import { ThemeProvider } from '@emotion/react'
+import { Box, Grid, Typography } from '@mui/material'
 import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 import ProfileData from '../../components/ProfileData'
 import ProfilePicture from '../../components/ProfilePicture'

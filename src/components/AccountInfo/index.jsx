@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { Box } from '@mui/system'
 import { Button, Typography } from '@mui/material'
-import { UserContext } from '../../context/UserContext'
 import DialogFormEmail from '../DialogFormEmail'
-import { styleProps, stylePropsFieldsBox } from './styles'
 import DialogFormPassword from '../DialogFormPassword'
+import { UserContext } from '../../context/UserContext'
+import { styleProps, stylePropsFieldsBox } from './styles'
 
 const AccountInfo = () => {
   const { userLog } = useContext(UserContext)

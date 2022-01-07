@@ -1,6 +1,6 @@
 import React from 'react'
-import TextareaAutosize from '@mui/material/TextareaAutosize'
 import { Controller } from 'react-hook-form'
+import TextareaAutosize from '@mui/material/TextareaAutosize'
 
 const TextAreaWrapper = ({
   control,
@@ -34,6 +34,8 @@ const TextAreaWrapper = ({
 export default TextAreaWrapper
 
 /*
+Ahora mismo este componente no lo estamos usando
+
 Solucionar Error:
 
 react_devtools_backend.js:4045 Warning: Received `false` for a non-boolean attribute `error`.

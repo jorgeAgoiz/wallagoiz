@@ -1,15 +1,15 @@
 import React, { useContext } from 'react'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { useForm } from 'react-hook-form'
 import { Box } from '@mui/material'
 import SaveIcon from '@mui/icons-material/Save'
 import TextFieldWrapper from '../TextFieldWrapper'
 import SubmitButton from '../SubmitButton'
-import { styleProps, stylePropsTf } from './styles'
 import { UserContext } from '../../context/UserContext'
 import { updateUser } from '../../services/updateUser'
-import { useNavigate } from 'react-router-dom'
+import { styleProps, stylePropsTf } from './styles'
 
 const schemaProfileInfo = yup.object({
   name: yup.string().required('Requerido'),

@@ -1,12 +1,19 @@
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { Box } from '@mui/system'
 import SendIcon from '@mui/icons-material/Send'
+import { InputAdornment } from '@mui/material'
 import TextFieldWrapper from '../TextfieldWrapper'
 import SubmitButton from '../SubmitButton'
-import { InputAdornment } from '@mui/material'
+import SelectInputWrapper from '../SelectInputWrapper'
+import InputFileWrapper from '../InputFileWrapper'
+import { useArticlesSwr } from '../../hooks/useArticlesSwr'
+import { createArticle } from '../../services/createArticle'
+import { articlesCategory } from '../../constants/index'
+import { UserContext } from '../../context/UserContext'
 import {
   styleProps,
   styleSelectInput,
@@ -17,14 +24,6 @@ import {
   stylePropsButton,
   styleInputFile
 } from './styles'
-import { articlesCategory } from '../../constants/index'
-import SelectInputWrapper from '../SelectInputWrapper'
-import InputFileWrapper from '../InputFileWrapper'
-import { useArticlesSwr } from '../../hooks/useArticlesSwr'
-import { createArticle } from '../../services/createArticle'
-
-import { UserContext } from '../../context/UserContext'
-import { useNavigate } from 'react-router-dom'
 
 const INITIAL_VALUES_ARTICLE = {
   title: '',
@@ -52,19 +51,24 @@ const ArticleForm = () => {
   } = useForm({ defaultValues: INITIAL_VALUES_ARTICLE, resolver: yupResolver(schemaArticle) })
 
   const onSubmit = async (data) => {
-    if (data.picture) {
-      data.picture = 'https://images.unsplash.com/photo-1494253109108-2e30c049369b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
+    try {
+      if (data.picture) {
+        data.picture = 'https://images.unsplash.com/photo-1494253109108-2e30c049369b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
+      }
+      data.userId = userLog.id
+      // Actualización de la caché
+      setArticles('http://localhost:3012/articles', [...articles, data], false)
+      // Actualización en la BBDD
+      const result = await createArticle(data)
+      if (result) {
+        // Si la BBDD se actualiza correctamente, realizamos una nueva llamada.
+        await setArticles('http://localhost:3012/articles')
+        return navigate('/')
+      }
+    } catch (err) {
+      console.log(err)
+      return navigate('/error')
     }
-    data.userId = userLog.id
-    setArticles('http://localhost:3012/articles', [...articles, data], false)
-    const result = await createArticle(data)
-    if (result) {
-      await setArticles('http://localhost:3012/articles')
-      return navigate('/')
-    }
-
-    /* const result = await createArticle(data)
-    console.log(result) */
   }
 
   return (

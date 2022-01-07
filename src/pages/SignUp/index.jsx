@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid } from '@mui/material'
-import { styleProps } from './styles'
 import SignUpForm from '../../components/SignUpForm'
+import { styleProps } from './styles'
 
 const SignUp = () => {
   return (

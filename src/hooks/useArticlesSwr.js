@@ -11,7 +11,7 @@ export const useArticlesSwr = () => {
     isError: error
   }
 }
-/* Hook reutilizable para hacer las llamadas a los datos.
-- Por defecto la key se pasa al fetcher como argumento
-- https://swr.vercel.app/es-ES/docs/arguments
+/*
+Custom Hook con SWR para el fetch de artículos, adjunto enlace a la documentación:
+https://swr.vercel.app/es-ES/docs/arguments
  */

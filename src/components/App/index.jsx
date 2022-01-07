@@ -12,11 +12,11 @@ import Home from '../../pages/Home'
 import SignUp from '../../pages/SignUp'
 import SignIn from '../../pages/SignIn'
 import NotFound from '../../pages/NotFound'
-import { styleProps } from './styles'
-import useUserData from '../../hooks/useUserData'
 import Account from '../../pages/Account'
 import Profile from '../../pages/Profile'
 import UploadArticle from '../../pages/UploadArticle'
+import useUserData from '../../hooks/useUserData'
+import { styleProps } from './styles'
 
 function App () {
   const { userLog } = useUserData()

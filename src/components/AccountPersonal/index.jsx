@@ -1,10 +1,15 @@
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import { UserContext } from '../../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import SaveIcon from '@mui/icons-material/Save'
 import SubmitButton from '../SubmitButton'
+import DatePickerWrapper from '../DatePickerWrapper'
+import SelectInputWrapper from '../SelectInputWrapper'
+import { updateUser } from '../../services/updateUser'
+import { UserContext } from '../../context/UserContext'
+import { options } from '../../constants'
 import {
   styleProps,
   stylePropsFieldsBox,
@@ -12,16 +17,14 @@ import {
   stylePropsSubmitBtn
 }
   from './styles'
-import DatePickerWrapper from '../DatePickerWrapper'
-import SelectInputWrapper from '../SelectInputWrapper'
-import { updateUser } from '../../services/updateUser'
-import { useNavigate } from 'react-router-dom'
-import { options } from '../../constants'
 
 const AccountPersonal = () => {
   const navigate = useNavigate()
   const { userLog, setUserLog } = useContext(UserContext)
-  const INITIAL_VALUES = { birthday: userLog.birthday, gender: userLog.gender }
+  const INITIAL_VALUES = {
+    birthday: userLog.birthday || null,
+    gender: userLog.gender || null
+  }
 
   const {
     control,

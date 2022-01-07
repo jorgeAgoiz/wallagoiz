@@ -1,8 +1,8 @@
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ThemeProvider } from '@emotion/react'
 import { CardMedia, Grid, Typography, Button } from '@mui/material'
 import { createTheme, responsiveFontSizes } from '@mui/material/styles'
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import errorImg from '../../images/errorImage.jpg'
 import { styleProps, stylePropsImg } from './styles'
 

@@ -2,6 +2,7 @@
 export const pages = ['Favoritos', 'Súbelo', 'Buzón']
 export const settings = ['Perfil', 'Cuenta', 'Tus productos', 'Cerrar Sesión']
 export const signIn = ['Iniciar sesión', 'Registrarse']
+// Opciones de sexo
 export const options = [
   {
     name: 'male',
@@ -12,6 +13,7 @@ export const options = [
     label: 'Mujer'
   }
 ]
+// Opciones de categorías
 export const articlesCategory = [
   {
     name: 'cars',

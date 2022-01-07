@@ -71,24 +71,24 @@ const DialogFormEmail = ({ open, handleClose }) => {
 
   return (
     <>
-        <Dialog open={open} onClose={handleClose}>
-            <Box component='form' onSubmit={handleSubmit(onSubmit)} sx={stylePropsForm}>
-                <DialogTitle sx={{ textAlign: 'center' }}>Cambiar Email</DialogTitle>
-                <DialogContent sx={stylePropsFields}>
-                  <DialogFormFields
-                          data={fieldsDataEmail}
-                          control={control}
-                          errors={errors}
-                          stylePropsTf={stylePropsTf}
-                          type='text'
-                      />
-                </DialogContent>
-                <DialogActions>
-                    <SubmitButton isSubmitting={isSubmitting} text='Modificar' altText='Guardando' Icon={SaveIcon} />
-                    <Button onClick={handleCloseCancel} variant='contained' color='error'>Cancelar</Button>
-                </DialogActions>
-            </Box>
-        </Dialog>
+      <Dialog open={open} onClose={handleClose}>
+        <Box component='form' onSubmit={handleSubmit(onSubmit)} sx={stylePropsForm}>
+          <DialogTitle sx={{ textAlign: 'center' }}>Cambiar Email</DialogTitle>
+          <DialogContent sx={stylePropsFields}>
+            <DialogFormFields
+              data={fieldsDataEmail}
+              control={control}
+              errors={errors}
+              stylePropsTf={stylePropsTf}
+              type='text'
+            />
+          </DialogContent>
+          <DialogActions>
+            <SubmitButton isSubmitting={isSubmitting} text='Modificar' altText='Guardando' Icon={SaveIcon} />
+            <Button onClick={handleCloseCancel} variant='contained' color='error'>Cancelar</Button>
+          </DialogActions>
+        </Box>
+      </Dialog>
     </>
   )
 }

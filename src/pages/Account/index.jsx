@@ -1,5 +1,5 @@
-import { Grid, Typography } from '@mui/material'
 import React from 'react'
+import { Grid, Typography } from '@mui/material'
 import AccountInfo from '../../components/AccountInfo'
 import AccountPersonal from '../../components/AccountPersonal'
 import { styleProps } from './styles'
