@@ -9,9 +9,11 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { UserContext } from '../../context/UserContext'
 import { styleProps, stylePropsCardActions } from './styles'
+import { useNavigate } from 'react-router-dom'
 
-const PreviewCard = ({ picture, title, price }) => {
+const PreviewCard = ({ picture, title, price, id }) => {
   const { userLog: { logged } } = useContext(UserContext)
+  const navigate = useNavigate()
   const favorite = false// En función de si es favorito para el usuario
 
   return (
@@ -31,7 +33,7 @@ const PreviewCard = ({ picture, title, price }) => {
         </Typography>
       </CardContent>
       <CardActions sx={stylePropsCardActions}>
-        <Button size='small'>Detalles</Button>
+        <Button size='small' onClick={() => navigate(`/details/${id}`)}>Detalles</Button>
         <Button size='small' disabled={!logged}>
           {
             favorite
