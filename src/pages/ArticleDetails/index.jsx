@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import ArticleCard from '../../components/ArticleCard'
 import LoadingSpinner from '../../components/LoadingSpinner'
 import { useArticleById } from '../../hooks/useArticleById'
-import { styleProps } from './styles'
+import { styleProps, stackStyles } from './styles'
 
 const ArticleDetails = () => {
   const { id } = useParams()
@@ -17,11 +17,13 @@ const ArticleDetails = () => {
     <Grid item xs={12} sm={11} md={9} lg={7} sx={styleProps}>
       {
             isLoading
-              ? <LoadingSpinner />
-              : <ArticleCard article={article} />
+              ? <LoadingSpinner stackStyle={stackStyles} />
+              : <ArticleCard article={article[0]} />
         }
     </Grid>
   )
 }
 
 export default ArticleDetails
+/* Este componente detenidamente quiero pensar en su comportamiento al hacer el fetch
+de los datos. */

@@ -1,11 +1,15 @@
 import React from 'react'
+import Typography from '@mui/material/Typography'
 
 const ArticleCard = ({ article }) => {
   console.log(article)
 
   return (
     <>
-      <h1>Detalles del articulo</h1>
+      <Typography variant='h4' gutterBottom>
+        Detalles
+      </Typography>
+      <img src={article.picture} alt={article.title} />
     </>
   )
 }

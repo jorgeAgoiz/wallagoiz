@@ -2,10 +2,10 @@ import React from 'react'
 import Stack from '@mui/material/Stack'
 import CircularProgress from '@mui/material/CircularProgress'
 
-const LoadingSpinner = () => {
+const LoadingSpinner = ({ stackStyle }) => {
   return (
-    <Stack sx={{ color: 'grey.500' }} spacing={2} direction='row'>
-      <CircularProgress color='success' />
+    <Stack sx={stackStyle} spacing={2} direction='row'>
+      <CircularProgress color='success' size={100} />
     </Stack>
   )
 }
