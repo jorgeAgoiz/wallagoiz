@@ -3,7 +3,9 @@ export const styleProps = {
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  width: '100%'
+  width: '100%',
+  backgroundColor: '#f3f6cf',
+  gap: '1.2rem'
 }
 
 export const stackStyles = {
