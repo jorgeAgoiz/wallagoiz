@@ -18,6 +18,7 @@ import UploadArticle from '../../pages/UploadArticle'
 import useUserData from '../../hooks/useUserData'
 import { styleProps } from './styles'
 import ArticleDetails from '../../pages/ArticleDetails'
+import MyProducts from '../../pages/MyProducts'
 
 function App () {
   const { userLog } = useUserData()
@@ -34,6 +35,7 @@ function App () {
           <Route exact path='/signin' element={<SignIn />} />
           <Route exact path='/account' element={userLog.logged ? <Account /> : <Navigate to='/' />} />
           <Route exact path='/profile' element={userLog.logged ? <Profile /> : <Navigate to='/' />} />
+          <Route exact path='/my-products' element={userLog.logged ? <MyProducts /> : <Navigate to='/' />} />
           <Route exact path='/upload' element={userLog.logged ? <UploadArticle /> : <Navigate to='/' />} />
           <Route exact path='/details/:id' element={userLog.logged ? <ArticleDetails /> : <Navigate to='/' />} />
           <Route exact path='/error' element={<NotFound />} />

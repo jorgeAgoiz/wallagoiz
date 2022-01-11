@@ -72,6 +72,9 @@ const NavBar = () => {
     if (textOption === settings[1]) {
       return navigate('/account')
     }
+    if (textOption === settings[2]) {
+      return navigate('/my-products')
+    }
     if (textOption === settings[0]) {
       return navigate('/profile')
     }

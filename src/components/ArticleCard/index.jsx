@@ -57,7 +57,7 @@ const ArticleCard = ({ article }) => {
       </Box>
       <Box sx={styleLocationCreated}>
         <Typography variant='subtitle2'>
-          {article.created_at}
+          En venta desde {article.created_at}
         </Typography>
         <Typography variant='subtitle2'>
           Ubicación del articulo
@@ -68,4 +68,4 @@ const ArticleCard = ({ article }) => {
 }
 
 export default ArticleCard
-/* Seguimos aqui dandole forma a los detalles del artículo */
+/* Aqui tenemos que darles funcionalidades */
