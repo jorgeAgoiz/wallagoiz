@@ -9,6 +9,8 @@ export const userDataState = {
   email: null,
   birthday: null,
   gender: null,
+  fav: null,
+  rating: null,
   logged: false
 }
 

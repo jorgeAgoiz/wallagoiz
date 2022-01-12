@@ -29,7 +29,7 @@ const MyProducts = () => {
                   <PreviewCard
                     key={article.id}
                     id={article.id}
-                    title={articles.title}
+                    title={article.title}
                     picture={article.picture}
                     price={article.price}
                   />

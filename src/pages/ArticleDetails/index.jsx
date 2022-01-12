@@ -18,7 +18,7 @@ const ArticleDetails = () => {
       {
             isLoading
               ? <LoadingSpinner stackStyle={stackStyles} />
-              : <ArticleCard article={article[0]} />
+              : <ArticleCard articleData={article[0]} />
         }
     </Grid>
   )

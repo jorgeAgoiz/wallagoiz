@@ -13,10 +13,15 @@ import {
   styleLocationCreated
 } from './styles'
 import FavIcon from '../FavIcon'
+import { useGetUser } from '../../hooks/useGetUser'
+import { useNavigate } from 'react-router-dom'
 
-const ArticleCard = ({ article }) => {
+const ArticleCard = ({ articleData }) => {
+  const { user, isLoading, isError } = useGetUser(articleData.userId)
   const [fav, setFav] = useState()
-  console.log(article)
+  const navigate = useNavigate()
+  console.log(user)
+  if (isError) return navigate('/error')
 
   return (
     <>
@@ -25,9 +30,11 @@ const ArticleCard = ({ article }) => {
       </Typography>
       <Box sx={stylePropsSeller}>
         <Typography variant='subtitle1'>
-          Nombre Vendedor
+          {!isLoading && `${user[0].name} ${user[0].lastName}`}
         </Typography>
-        <Rating name='read-only' value={4} readOnly />
+        {
+          !isLoading && <Rating name='read-only' value={user[0].rating} readOnly />
+        }
         <IconButton color='primary' onClick={() => setFav(!fav)}>
           <FavIcon isFav={fav} />
         </IconButton>
@@ -38,26 +45,26 @@ const ArticleCard = ({ article }) => {
       <CardMedia
         component='img'
         height='460'
-        image={article.picture}
-        alt={article.title}
+        image={articleData.picture}
+        alt={articleData.title}
         sx={styleMediaPic}
       />
       <Box sx={stylePriceTitle}>
         <Typography variant='h4'>
-          {article.price} Euros
+          {articleData.price} Euros
         </Typography>
         <Typography variant='h6'>
-          {article.title}
+          {articleData.title}
         </Typography>
       </Box>
       <Box sx={styleDescription}>
         <Typography variant='body1'>
-          {article.description}
+          {articleData.description}
         </Typography>
       </Box>
       <Box sx={styleLocationCreated}>
         <Typography variant='subtitle2'>
-          En venta desde {article.created_at}
+          En venta desde {articleData.created_at}
         </Typography>
         <Typography variant='subtitle2'>
           Ubicación del articulo
@@ -68,4 +75,5 @@ const ArticleCard = ({ article }) => {
 }
 
 export default ArticleCard
-/* Aqui tenemos que darles funcionalidades */
+/* Puliendo los datos del usuario que ha creado el articulo,
+en breve hay que darle funcionalidad al FavIcon */

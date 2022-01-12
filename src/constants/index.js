@@ -132,7 +132,9 @@ export const defaultUser = {
   profilePic: null,
   birthday: null,
   gender: null,
-  password: null
+  password: null,
+  fav: [],
+  rating: 0
 }
 
 /* Campos del formulario cambiar email */
