@@ -175,3 +175,4 @@ export const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 /* API URLS */
 export const SERVER_URL = 'http://localhost:3012'
+export const SERVER_URL_FASTAPI = 'http://127.0.0.1:8000'

@@ -1,15 +1,14 @@
-import { SERVER_URL, defaultUser } from '../constants'
+import { /* SERVER_URL, */ SERVER_URL_FASTAPI } from '../constants'
 /* global fetch */
 export const createUser = ({ name, lastName, email, password, location }) => {
   const newUser = {
-    ...defaultUser,
     name,
     lastName,
     email,
     password,
     location
   }
-  return fetch(`${SERVER_URL}/users`, {
+  return fetch(`${SERVER_URL_FASTAPI}/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -19,3 +18,4 @@ export const createUser = ({ name, lastName, email, password, location }) => {
     .then(data => data.json())
     .catch(err => err)
 }
+/* Conectado con FASTAPI */
