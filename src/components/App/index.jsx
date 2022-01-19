@@ -22,7 +22,6 @@ import MyProducts from '../../pages/MyProducts'
 
 function App () {
   const { userLog } = useUserData()
-  console.log(userLog)
 
   return (
     <Grid container sx={styleProps}>
