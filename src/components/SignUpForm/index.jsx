@@ -40,7 +40,12 @@ const SignUpForm = () => {
       await createUser(data)
       return navigate('/')
     } catch (err) {
-      console.log(err)
+      if (err.code === 406) {
+        return setError('email', {
+          type: 'manual',
+          message: 'Email en uso.'
+        })
+      }
       return navigate('/error')
     }
   }

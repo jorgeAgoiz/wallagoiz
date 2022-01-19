@@ -15,7 +15,17 @@ export const createUser = ({ name, lastName, email, password, location }) => {
     },
     body: JSON.stringify(newUser)
   })
-    .then(data => data.json())
-    .catch(err => err)
+    .then(data => {
+      if (data.status === 406) {
+        const error = new Error('Bad Bad Baaaadd!!!')
+        error.code = 406
+        throw error
+      }
+      return data.json()
+    })
 }
-/* Conectado con FASTAPI */
+/*
+  - Conectado con FASTAPI
+  - Quiza pueda hacer una manejador de errores customizado
+  - Limpiar codigo y limpiar variables sin usar
+*/
