@@ -1,8 +1,8 @@
 import useSWR from 'swr'
-import { fetcher } from '../constants/index'
+import { fetcher, SERVER_URL_FASTAPI } from '../constants/index'
 
 export const useGetUser = (userId) => {
-  const { data, error } = useSWR(`http://localhost:3012/users?id=${userId}`, fetcher)
+  const { data, error } = useSWR(`${SERVER_URL_FASTAPI}/user/${userId}`, fetcher)
 
   return {
     user: data,
@@ -10,3 +10,6 @@ export const useGetUser = (userId) => {
     isError: error
   }
 }
+
+/* Ahora necesitamos continuar aqui, gestionando esta llamada a la API
+- Pasarle el token a SWR como argumento */

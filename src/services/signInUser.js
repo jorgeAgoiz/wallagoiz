@@ -1,16 +1,13 @@
-import { SERVER_URL } from '../constants'
-/* N1 - Metodo SignInUser temporal, modificar para el backend:
-- Metodo POST
-- Cambiar el uso de esta funcion fetch
-- Crear una nueva función para traer los datos del usuario al contexto global
-- Estudiar como incluir el bearer token en proximas llamadas
-*/
+import { SERVER_URL_FASTAPI } from '../constants'
+
 export const SignInUser = ({ email, password }) => {
   /* global fetch */
-  return fetch(`${SERVER_URL}/users?email=${email}&password=${password}`)
+  return fetch(`${SERVER_URL_FASTAPI}/signin`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email, password })
+  })
     .then(data => data.json())
-    .then(result => {
-      return result
-    })
-    .catch(err => err)
 }

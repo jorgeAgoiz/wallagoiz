@@ -14,6 +14,7 @@ export const options = [
   }
 ]
 // Opciones de categorías
+// Esto podría ser una tabla aparte y asignarle un ID a cada categoría
 export const articlesCategory = [
   {
     name: 'cars',
@@ -133,8 +134,7 @@ export const defaultUser = {
   birthday: null,
   gender: null,
   password: null,
-  fav: [],
-  rating: 0
+  rating: 0 // Echarle un ojo a esto
 }
 
 /* Campos del formulario cambiar email */

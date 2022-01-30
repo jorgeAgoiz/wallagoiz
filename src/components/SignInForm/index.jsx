@@ -11,6 +11,7 @@ import { SignInUser } from '../../services/signInUser'
 import { UserContext } from '../../context/UserContext'
 import { INITIAL_FORM_STATE_SI } from '../../constants'
 import { styleProps, stylePropsButton } from './styles'
+import { getMyUserData } from '../../services/getMyUserData'
 
 const schemaSignUp = yup.object({
   email: yup.string().email().required('Requerido'),
@@ -28,11 +29,20 @@ const SignInForm = () => {
   } = useForm({ defaultValues: INITIAL_FORM_STATE_SI, resolver: yupResolver(schemaSignUp) })
 
   const onSubmit = async (data) => {
-    /* N2 - Este método habra que modificarlo una vez hecho el
-    BackEnd para adaptarlo a los nuevos requisitos */
     try {
       const userSigned = await SignInUser(data)
-      if (userSigned.length <= 0) {
+      if (!userSigned.access_token) {
+        throw Error(userSigned.detail)
+      }
+      const myUser = await getMyUserData({ token: userSigned.access_token })
+      delete myUser.password
+
+      setUserLog({ ...myUser, logged: true })
+      /* global sessionStorage */
+      sessionStorage.setItem('token', userSigned.access_token)
+      return navigate('/')
+    } catch (err) {
+      if (err.message === 'Incorrect email or password.') {
         setError('password', {
           type: 'manual',
           message: 'Contraseña o Email invalido'
@@ -42,16 +52,8 @@ const SignInForm = () => {
           message: 'Contraseña o Email invalido'
         })
       }
-      delete userSigned[0].password
-      setUserLog({ ...userSigned[0], logged: true })
-      /* global sessionStorage */
-      sessionStorage.setItem('id', userSigned[0].id.toString())
-      return navigate('/')
-    } catch (err) {
-      console.log(err)
       return navigate('/error')
     }
-    /* *************************************************** */
   }
 
   return (

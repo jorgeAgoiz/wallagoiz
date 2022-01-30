@@ -1,4 +1,4 @@
-import { /* SERVER_URL, */ SERVER_URL_FASTAPI } from '../constants'
+import { SERVER_URL_FASTAPI } from '../constants'
 /* global fetch */
 export const createUser = ({ name, lastName, email, password, location }) => {
   const newUser = {
@@ -24,8 +24,3 @@ export const createUser = ({ name, lastName, email, password, location }) => {
       return data.json()
     })
 }
-/*
-  - Conectado con FASTAPI
-  - Quiza pueda hacer una manejador de errores customizado
-  - Limpiar codigo y limpiar variables sin usar
-*/
