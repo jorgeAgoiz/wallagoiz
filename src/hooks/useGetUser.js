@@ -1,8 +1,10 @@
 import useSWR from 'swr'
-import { fetcher, SERVER_URL_FASTAPI } from '../constants/index'
+import { fetcherWithToken, SERVER_URL_FASTAPI } from '../constants/index'
 
-export const useGetUser = (userId) => {
-  const { data, error } = useSWR(`${SERVER_URL_FASTAPI}/user/${userId}`, fetcher)
+export const useGetUser = ({ userId }) => {
+  /* global sessionStorage */
+  const token = sessionStorage.getItem('token')
+  const { data, error } = useSWR([`${SERVER_URL_FASTAPI}/users/${userId}`, token], fetcherWithToken)
 
   return {
     user: data,
@@ -10,6 +12,3 @@ export const useGetUser = (userId) => {
     isError: error
   }
 }
-
-/* Ahora necesitamos continuar aqui, gestionando esta llamada a la API
-- Pasarle el token a SWR como argumento */

@@ -21,7 +21,7 @@ import { useGetUser } from '../../hooks/useGetUser'
 import useUserData from '../../hooks/useUserData'
 
 const ArticleCard = ({ articleData }) => {
-  const { user, isLoading, isError } = useGetUser(articleData.userId)
+  const { user, isLoading, isError } = useGetUser({ userId: articleData.userId })
   const { userLog } = useUserData()
   const [fav, setFav] = useState()
   const navigate = useNavigate()
@@ -35,10 +35,10 @@ const ArticleCard = ({ articleData }) => {
       </Typography>
       <Box sx={stylePropsSeller}>
         <Typography variant='subtitle1'>
-          {!isLoading && `${user[0].name} ${user[0].lastName}`}
+          {!isLoading && `${user.name} ${user.lastName}`}
         </Typography>
         {
-          !isLoading && <Rating name='read-only' value={user[0].rating} readOnly />
+          !isLoading && <Rating name='read-only' value={user.rating} readOnly />
         }
         <IconButton color='primary' onClick={() => setFav(!fav)}>
           <FavIcon isFav={fav} userId={userLog.id} articleId={articleData.id} />
