@@ -5,9 +5,6 @@ import { createFav } from '../../services/createFav'
 import { deleteFav } from '../../services/deleteFav'
 
 const FavIcon = ({ isFav, userId, articleId }) => {
-  console.log(userId)
-  console.log(articleId)
-
   const addFav = async (evt) => {
     const result = await createFav({ userId, articleId })
     console.log(result)

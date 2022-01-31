@@ -72,7 +72,6 @@ const DialogFormPassword = ({ open, handleClose }) => {
           message: 'Las nuevas contraseñas deben coincidir.'
         })
       }
-      /* Aqui nuevo metodo para el cambio de contraseña específico */
       const newPassword = { password: data.newPassword }
       const updated = await updateUser({ fields: newPassword, token })
       if (!updated.id) {

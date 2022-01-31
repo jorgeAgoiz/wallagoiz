@@ -2,13 +2,12 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Grid } from '@mui/material'
 import PreviewCard from '../../components/PreviewCard'
-import { getArticles } from '../../services/getArticles'
 import { useArticlesSwr } from '../../hooks/useArticlesSwr'
 import { styleProps } from './styles'
 
 const Home = () => {
   const navigate = useNavigate()
-  const { articles, isLoading, isError } = useArticlesSwr('/articles', getArticles)
+  const { articles, isLoading, isError } = useArticlesSwr()
   console.log(articles)// TODO: Provisional
 
   if (isLoading) return <div>Cargando...</div>// Aqui crearemos un Spinner de carga

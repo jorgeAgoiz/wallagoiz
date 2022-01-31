@@ -1,8 +1,8 @@
 import useSWR from 'swr'
-import { fetcher } from '../constants/index'
+import { fetcher, SERVER_URL_FASTAPI } from '../constants/index'
 
 export const useArticlesSwr = () => {
-  const { data, error, mutate } = useSWR('http://localhost:3012/articles', fetcher)
+  const { data, error, mutate } = useSWR(`${SERVER_URL_FASTAPI}/articles`, fetcher)
 
   return {
     articles: data,
@@ -11,7 +11,3 @@ export const useArticlesSwr = () => {
     isError: error
   }
 }
-/*
-Custom Hook con SWR para el fetch de artículos, adjunto enlace a la documentación:
-https://swr.vercel.app/es-ES/docs/arguments
- */
