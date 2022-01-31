@@ -28,8 +28,10 @@ const schemaChangeEmail = yup.object({
 })
 
 const DialogFormEmail = ({ open, handleClose }) => {
+  /* global sessionStorage */
+  const token = sessionStorage.getItem('token')
   /* Contexto */
-  const { userLog, setUserLog } = useContext(UserContext)
+  const { setUserLog } = useContext(UserContext)
 
   /* React-hook-form */
   const {
@@ -55,7 +57,8 @@ const DialogFormEmail = ({ open, handleClose }) => {
       })
     }
     try {
-      const result = await updateUser(userLog.id, { email: data.email })
+      const fields = { email: data.email }
+      const result = await updateUser({ fields, token })
       if (!result.id) {
         return console.log('Something went wrong.')
       }

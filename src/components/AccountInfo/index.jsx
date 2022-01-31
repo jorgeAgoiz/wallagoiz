@@ -18,7 +18,6 @@ const AccountInfo = () => {
   const handleCloseEmail = (reset) => {
     setOpenEmail(false)
   }
-  /* EMAIL */
 
   /* PASSWORD */
   const handleClickOpenPassword = () => {
@@ -27,7 +26,7 @@ const AccountInfo = () => {
   const handleClosePassword = () => {
     setOpenPassword(false)
   }
-  /* PASSWORD */
+
   return (
     <Box component='div' sx={styleProps}>
       <Typography variant='subtitle1' component='div'>

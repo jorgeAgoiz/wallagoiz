@@ -1,11 +1,12 @@
-import { SERVER_URL } from '../constants'
+import { SERVER_URL_FASTAPI } from '../constants'
 
-export const updateUser = (id, fields) => {
+export const updateUser = ({ fields, token }) => {
   /* global fetch */
-  return fetch(`${SERVER_URL}/users/${id}`, {
+  return fetch(`${SERVER_URL_FASTAPI}/user`, {
     method: 'PATCH',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify(fields)
   })

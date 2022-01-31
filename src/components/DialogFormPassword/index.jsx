@@ -31,6 +31,8 @@ const schemaChangePassword = yup.object({
 })
 
 const DialogFormPassword = ({ open, handleClose }) => {
+  /* global sessionStorage */
+  const token = sessionStorage.getItem('token')
   const { userLog } = useContext(UserContext)
   const navigate = useNavigate()
   /* React-hook-form */
@@ -52,13 +54,13 @@ const DialogFormPassword = ({ open, handleClose }) => {
   const onSubmit = async (data) => {
     try {
       const exists = await SignInUser({ email: userLog.email, password: data.password })
-      if (!exists[0]) {
+      if (!exists.access_token) {
         return setError('password', {
           type: 'manual',
           message: 'Contraseña invalida.'
         })
       }
-      if (exists[0].password === data.newPassword) {
+      if (exists.password === data.newPassword) {
         return setError('newPassword', {
           type: 'manual',
           message: 'Utilice una contraseña nueva.'
@@ -70,7 +72,9 @@ const DialogFormPassword = ({ open, handleClose }) => {
           message: 'Las nuevas contraseñas deben coincidir.'
         })
       }
-      const updated = await updateUser(userLog.id, { password: data.newPassword })
+      /* Aqui nuevo metodo para el cambio de contraseña específico */
+      const newPassword = { password: data.newPassword }
+      const updated = await updateUser({ fields: newPassword, token })
       if (!updated.id) {
         console.log('Something went wrong.')
         handleClose()

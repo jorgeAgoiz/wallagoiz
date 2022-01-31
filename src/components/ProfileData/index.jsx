@@ -18,6 +18,8 @@ const schemaProfileInfo = yup.object({
 })
 
 const ProfileData = () => {
+  /* global sessionStorage */
+  const token = sessionStorage.getItem('token')
   const navigate = useNavigate()
   const { userLog, setUserLog } = useContext(UserContext)
   const INITIAL_VALUES = {
@@ -34,7 +36,7 @@ const ProfileData = () => {
 
   const onSubmit = async (data) => {
     try {
-      const updatedUser = await updateUser(userLog.id, data)
+      const updatedUser = await updateUser({ fields: data, token })
       if (!updatedUser.id) {
         setError('name', {
           type: 'manual',
@@ -51,6 +53,7 @@ const ProfileData = () => {
       }
       delete updatedUser.password
       setUserLog({ logged: true, ...updatedUser })
+      /* Aqui quizá pueda implementar algun tipo de confirmación */
     } catch (err) {
       console.log(err)
       return navigate('/error')

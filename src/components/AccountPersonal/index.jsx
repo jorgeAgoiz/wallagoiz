@@ -19,6 +19,8 @@ import {
   from './styles'
 
 const AccountPersonal = () => {
+  /* global sessionStorage */
+  const token = sessionStorage.getItem('token')
   const navigate = useNavigate()
   const { userLog, setUserLog } = useContext(UserContext)
   const INITIAL_VALUES = {
@@ -39,7 +41,7 @@ const AccountPersonal = () => {
       gender: data.gender
     }
     try {
-      const userUpdated = await updateUser(userLog.id, update)
+      const userUpdated = await updateUser({ fields: update, token })
       if (!userUpdated.id) {
         setError('birthday', {
           type: 'manual',
@@ -52,6 +54,7 @@ const AccountPersonal = () => {
       }
       delete userUpdated.password
       setUserLog({ ...userLog, ...userUpdated })
+      /* Aqui podemos implementar algun tipo de confirmación */
     } catch (err) {
       console.log(err)
       return navigate('/error')
