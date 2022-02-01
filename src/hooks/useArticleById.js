@@ -1,8 +1,8 @@
 import useSWR from 'swr'
-import { fetcher } from '../constants/index'
+import { fetcherWithToken, SERVER_URL_FASTAPI } from '../constants/index'
 
-export const useArticleById = (id) => {
-  const { data, error, mutate } = useSWR(`http://localhost:3012/articles?id=${id}`, fetcher)
+export const useArticleById = ({ id, token }) => {
+  const { data, error, mutate } = useSWR([`${SERVER_URL_FASTAPI}/article?id=${id}`, token], fetcherWithToken)
 
   return {
     article: data,
@@ -11,4 +11,3 @@ export const useArticleById = (id) => {
     isError: error
   }
 }
-/* Podremos continuar aqui, modificando esta llamada a la API */

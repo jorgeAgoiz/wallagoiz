@@ -7,9 +7,11 @@ import { useArticleById } from '../../hooks/useArticleById'
 import { styleProps, stackStyles } from './styles'
 
 const ArticleDetails = () => {
+  /* global sessionStorage */
+  const token = sessionStorage.getItem('token')
   const { id } = useParams()
   const navigate = useNavigate()
-  const { article, isError, isLoading } = useArticleById(id)
+  const { article, isError, isLoading } = useArticleById({ id, token })
 
   if (isError) return navigate('/error')
 
@@ -18,7 +20,7 @@ const ArticleDetails = () => {
       {
             isLoading
               ? <LoadingSpinner stackStyle={stackStyles} />
-              : <ArticleCard articleData={article[0]} />
+              : <ArticleCard articleData={article} />
         }
     </Grid>
   )

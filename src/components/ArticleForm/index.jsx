@@ -12,7 +12,7 @@ import SelectInputWrapper from '../SelectInputWrapper'
 import InputFileWrapper from '../InputFileWrapper'
 import { useArticlesSwr } from '../../hooks/useArticlesSwr'
 import { createArticle } from '../../services/createArticle'
-import { articlesCategory } from '../../constants/index'
+import { articlesCategory, SERVER_URL_FASTAPI } from '../../constants/index'
 import { UserContext } from '../../context/UserContext'
 import {
   styleProps,
@@ -41,6 +41,8 @@ const schemaArticle = yup.object({
 })
 
 const ArticleForm = () => {
+  /* global sessionStorage */
+  const token = sessionStorage.getItem('token')
   const { userLog } = useContext(UserContext)
   const navigate = useNavigate()
   const { articles, setArticles } = useArticlesSwr()
@@ -57,12 +59,12 @@ const ArticleForm = () => {
       }
       data.userId = userLog.id
       // Actualización de la caché
-      setArticles('http://localhost:3012/articles', [...articles, data], false)
+      setArticles(`${SERVER_URL_FASTAPI}/article`, [...articles, data], false)
       // Actualización en la BBDD
-      const result = await createArticle(data)
+      const result = await createArticle({ ...data, token })
       if (result) {
         // Si la BBDD se actualiza correctamente, realizamos una nueva llamada.
-        await setArticles('http://localhost:3012/articles')
+        await setArticles(`${SERVER_URL_FASTAPI}/article`)
         return navigate('/')
       }
     } catch (err) {

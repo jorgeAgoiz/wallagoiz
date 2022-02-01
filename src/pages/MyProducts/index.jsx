@@ -9,9 +9,11 @@ import LoadingSpinner from '../../components/LoadingSpinner'
 import { useNavigate } from 'react-router-dom'
 
 const MyProducts = () => {
+  /* global sessionStorage */
+  const token = sessionStorage.getItem('token')
   const navigate = useNavigate()
   const { userLog } = useContext(UserContext)
-  const { articles, isLoading, isError } = useUserArticles(userLog.id)
+  const { articles, isLoading, isError } = useUserArticles({ userId: userLog.id, token })
 
   if (isLoading) return <LoadingSpinner stackStyle={stackStyles} />
   if (isError) return navigate('/error')

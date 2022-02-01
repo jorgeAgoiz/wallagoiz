@@ -1,23 +1,22 @@
-import { SERVER_URL } from '../constants'
-import { convertDate } from '../utils/convertDate'
+import { SERVER_URL_FASTAPI } from '../constants'
 /* global fetch */
-export const createArticle = ({ title, category, price, description, picture, userId }) => {
+export const createArticle = ({ title, category, price, description, picture, userId, token }) => {
   const newArticle = {
     userId,
     title,
     description,
     price,
     category,
-    created_at: convertDate(new Date(Date.now())),
     picture
   }
-  return fetch(`${SERVER_URL}/articles`, {
+  console.log(newArticle)
+  return fetch(`${SERVER_URL_FASTAPI}/article`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify(newArticle)
   })
     .then(data => data.json())
-    .catch(err => err)
 }
