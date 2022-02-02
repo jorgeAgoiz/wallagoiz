@@ -5,16 +5,14 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { UserContext } from '../../context/UserContext'
 import { styleProps, stylePropsCardActions } from './styles'
 import { useNavigate } from 'react-router-dom'
+import FavIcon from '../FavIcon'
 
 const PreviewCard = ({ picture, title, price, id }) => {
-  const { userLog: { logged } } = useContext(UserContext)
+  const { userLog } = useContext(UserContext)
   const navigate = useNavigate()
-  const favorite = false// En función de si es favorito para el usuario
 
   return (
     <Card sx={styleProps}>
@@ -34,16 +32,15 @@ const PreviewCard = ({ picture, title, price, id }) => {
       </CardContent>
       <CardActions sx={stylePropsCardActions}>
         <Button size='small' onClick={() => navigate(`/details/${id}`)}>Detalles</Button>
-        <Button size='small' disabled={!logged}>
-          {
-            favorite
-              ? <FavoriteIcon />
-              : <FavoriteBorderIcon />
-          }
-        </Button>
+        <FavIcon articleId={id} userId={userLog.id} logged={userLog.logged} />
       </CardActions>
     </Card>
   )
 }
 
 export default PreviewCard
+
+/*
+  Hay que seguir implementando todo el contexto de favoritos, habrá
+  que elegir si hacerlo con un contexto react o con SWR
+*/

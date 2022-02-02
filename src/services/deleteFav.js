@@ -1,12 +1,12 @@
-import { SERVER_URL } from '../constants'
+import { SERVER_URL_FASTAPI } from '../constants'
 
 /* global fetch */
-export const deleteFav = ({ userId, articleId }) => {
-  return fetch(`${SERVER_URL}/favs?articleId=${articleId}`, {
-    method: 'DELETE'
+export const deleteFav = ({ userId, articleId, token }) => {
+  return fetch(`${SERVER_URL_FASTAPI}/favs/${articleId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   })
-    .then(data => data.json())
-    .catch(err => err)
+    .then(data => data.status)
 }
-
-/* Esto no funcionaría porque con el metodo DELETE no acepta queries */

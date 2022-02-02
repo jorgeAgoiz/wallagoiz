@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
-
 import Typography from '@mui/material/Typography'
 import { Box } from '@mui/material'
 import CardMedia from '@mui/material/CardMedia'
 import Rating from '@mui/material/Rating'
 import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
 import Breadcrumb from '../Breadcrumb'
 
 import {
@@ -23,7 +21,6 @@ import useUserData from '../../hooks/useUserData'
 const ArticleCard = ({ articleData }) => {
   const { user, isLoading, isError } = useGetUser({ userId: articleData.userId })
   const { userLog } = useUserData()
-  const [fav, setFav] = useState()
   const navigate = useNavigate()
   if (isError) return navigate('/error')
 
@@ -40,9 +37,7 @@ const ArticleCard = ({ articleData }) => {
         {
           !isLoading && <Rating name='read-only' value={user.rating} readOnly />
         }
-        <IconButton color='primary' onClick={() => setFav(!fav)}>
-          <FavIcon isFav={fav} userId={userLog.id} articleId={articleData.id} />
-        </IconButton>
+        <FavIcon userId={userLog.id} articleId={articleData.id} />
         <Button variant='contained' color='success' size='large'>
           Abrir Chat
         </Button>
