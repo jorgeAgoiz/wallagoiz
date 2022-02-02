@@ -16,6 +16,7 @@ const useUserData = () => {
         })
         .catch(err => {
           console.log(err)
+          /* Manejo de errores */
         })
     }
   }, [])

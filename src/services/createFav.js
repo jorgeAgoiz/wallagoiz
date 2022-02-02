@@ -15,5 +15,5 @@ export const createFav = ({ userId, articleId, token }) => {
     },
     body: JSON.stringify(newFav)
   })
-    .then(data => data.json())
+    .then(data => data.status)
 }

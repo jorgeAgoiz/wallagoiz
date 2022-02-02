@@ -14,6 +14,10 @@ const PreviewCard = ({ picture, title, price, id }) => {
   const { userLog } = useContext(UserContext)
   const navigate = useNavigate()
 
+  const onHandleDetails = () => {
+    return navigate(`/details/${id}`)
+  }
+
   return (
     <Card sx={styleProps}>
       <CardMedia
@@ -31,16 +35,17 @@ const PreviewCard = ({ picture, title, price, id }) => {
         </Typography>
       </CardContent>
       <CardActions sx={stylePropsCardActions}>
-        <Button size='small' onClick={() => navigate(`/details/${id}`)}>Detalles</Button>
-        <FavIcon articleId={id} userId={userLog.id} logged={userLog.logged} />
+        <Button
+          size='small'
+          onClick={onHandleDetails}
+          disabled={!userLog.logged}
+        >
+          Detalles
+        </Button>
+        <FavIcon articleId={id} userId={userLog.id} logged={!userLog.logged} />
       </CardActions>
     </Card>
   )
 }
 
 export default PreviewCard
-
-/*
-  Hay que seguir implementando todo el contexto de favoritos, habrá
-  que elegir si hacerlo con un contexto react o con SWR
-*/

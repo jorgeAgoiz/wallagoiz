@@ -8,7 +8,6 @@ import { styleProps } from './styles'
 const Home = () => {
   const navigate = useNavigate()
   const { articles, isLoading, isError } = useArticlesSwr()
-  console.log(articles)// TODO: Provisional
 
   if (isLoading) return <div>Cargando...</div>// Aqui crearemos un Spinner de carga
   if (isError) return navigate('/error')
@@ -16,7 +15,7 @@ const Home = () => {
   return (
     <Grid item xs={12} sx={styleProps}>
       {
-        articles.map(article => {
+        articles.map((article) => {
           return (
             <PreviewCard
               key={article.id}

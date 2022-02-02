@@ -19,10 +19,12 @@ import useUserData from '../../hooks/useUserData'
 import { styleProps } from './styles'
 import ArticleDetails from '../../pages/ArticleDetails'
 import MyProducts from '../../pages/MyProducts'
+import { useGetFavs } from '../../hooks/useGetFavs'
 
 function App () {
   const { userLog } = useUserData()
-
+  const { favs } = useGetFavs({ logged: userLog.logged })
+  console.log(favs)
   return (
     <Grid container sx={styleProps}>
       <Router>
