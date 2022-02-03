@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import IconButton from '@mui/material/IconButton'
@@ -6,18 +6,19 @@ import { createFav } from '../../services/createFav'
 import { deleteFav } from '../../services/deleteFav'
 import { FavContext } from '../../context/FavContext'
 import { getFavs } from '../../services/getFavs'
+import { useIsFav } from '../../hooks/useIsFav'
 
 const FavIcon = ({ userId, articleId, logged }) => {
   /* global sessionStorage */
   const token = sessionStorage.getItem('token')
   const { favs, setFavs } = useContext(FavContext)
-  const [fav, setFav] = useState()
+  const { fav, setFav } = useIsFav({ articleId, favs })
 
   const addFav = async (evt) => {
     try {
       const result = await createFav({ userId, articleId, token })
       if (result !== 201) {
-        throw new Error('Something went wrong')
+        throw new Error('Something went wrong.')
       }
       const newFavList = await getFavs({ token })
       setFavs(newFavList)
@@ -31,13 +32,19 @@ const FavIcon = ({ userId, articleId, logged }) => {
   const removeFav = async (evt) => {
     try {
       const result = await deleteFav({ userId, articleId, token })
-      if (result === 204) {
-        return setFav(false)
+      if (result !== 204) {
+        throw new Error('Something went wrong.')
         /* Aqui podriamos implementar los toast de confirmacion */
       }
-      return
+      const newFavList = await getFavs({ token })
+      if (newFavList.detail) {
+        setFavs([])
+        return setFav(false)
+      }
+
+      setFavs(newFavList)
+      return setFav(false)
     } catch (error) {
-      console.log('Something went wrong')
       console.log(error)
       /* Aqui podriamos implementar los toast de confirmacion */
     }
@@ -56,5 +63,3 @@ const FavIcon = ({ userId, articleId, logged }) => {
 }
 
 export default FavIcon
-
-/* Seguiremos aqui implementando los favs de artículos */

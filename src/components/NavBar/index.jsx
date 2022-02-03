@@ -19,11 +19,13 @@ import { emptyAvatarPic } from '../../utils/createAvatar'
 import { styleProps, stylePropsLink } from './styles'
 import UserMenu from '../UserMenu'
 import AlertDialog from '../BasicDialog'
+import { FavContext } from '../../context/FavContext'
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
   const { userLog, setUserLog } = useContext(UserContext)
+  const { setFavs } = useContext(FavContext)
   const navigate = useNavigate()
   // Estado y funciones Modal
   const [open, setOpen] = useState(false)
@@ -37,6 +39,7 @@ const NavBar = () => {
     setUserLog(userDataState)
     /* global sessionStorage */
     sessionStorage.clear()
+    setFavs([])
     setOpen(false)
     return navigate('/')
   }
@@ -59,6 +62,9 @@ const NavBar = () => {
     const textOption = event.target.innerText
     if (textOption === pages[1].toUpperCase()) {
       return navigate('/upload')
+    }
+    if (textOption === pages[0].toUpperCase()) {
+      return navigate('/favorites')
     }
     if (textOption === signIn[0]) {
       return navigate('/signin')

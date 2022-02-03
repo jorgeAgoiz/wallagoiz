@@ -20,11 +20,11 @@ import { styleProps } from './styles'
 import ArticleDetails from '../../pages/ArticleDetails'
 import MyProducts from '../../pages/MyProducts'
 import { useGetFavs } from '../../hooks/useGetFavs'
+import MyFavorites from '../../pages/MyFavorites/MyFavorites'
 
 function App () {
   const { userLog } = useUserData()
   const { favs } = useGetFavs({ logged: userLog.logged })
-  console.log(favs)
   return (
     <Grid container sx={styleProps}>
       <Router>
@@ -37,6 +37,7 @@ function App () {
           <Route exact path='/account' element={userLog.logged ? <Account /> : <Navigate to='/' />} />
           <Route exact path='/profile' element={userLog.logged ? <Profile /> : <Navigate to='/' />} />
           <Route exact path='/my-products' element={userLog.logged ? <MyProducts /> : <Navigate to='/' />} />
+          <Route exact path='/favorites' element={userLog.logged ? <MyFavorites /> : <Navigate to='/' />} />
           <Route exact path='/upload' element={userLog.logged ? <UploadArticle /> : <Navigate to='/' />} />
           <Route exact path='/details/:id' element={userLog.logged ? <ArticleDetails /> : <Navigate to='/' />} />
           <Route exact path='/error' element={<NotFound />} />

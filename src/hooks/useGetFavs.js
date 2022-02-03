@@ -4,18 +4,22 @@ import { getFavs } from '../services/getFavs'
 
 export const useGetFavs = ({ logged }) => {
   const { favs, setFavs } = useContext(FavContext)
-
+  /* global sessionStorage */
+  const token = sessionStorage.getItem('token')
   useEffect(() => {
     if (logged) {
-      /* global sessionStorage */
-      const token = sessionStorage.getItem('token')
       getFavs({ token })
         .then(results => {
-          return setFavs(results)
+          const favs = results.map(f => {
+            f.isFav = true
+            return f
+          })
+
+          return setFavs(favs)
         })
         .catch(err => console.log(err))
     }
-  }, [logged])
+  }, [logged, token])
 
   return { favs }
 }
