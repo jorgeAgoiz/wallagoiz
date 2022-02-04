@@ -66,6 +66,9 @@ const NavBar = () => {
     if (textOption === pages[0].toUpperCase()) {
       return navigate('/favorites')
     }
+    if (textOption === pages[2].toUpperCase()) {
+      return navigate('/messages')
+    }
     if (textOption === signIn[0]) {
       return navigate('/signin')
     }

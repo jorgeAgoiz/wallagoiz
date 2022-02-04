@@ -20,11 +20,14 @@ import { styleProps } from './styles'
 import ArticleDetails from '../../pages/ArticleDetails'
 import MyProducts from '../../pages/MyProducts'
 import { useGetFavs } from '../../hooks/useGetFavs'
-import MyFavorites from '../../pages/MyFavorites/MyFavorites'
+import MyFavorites from '../../pages/MyFavorites'
+import SearchResults from '../../pages/SearchResults'
+import Chat from '../../pages/Chat'
 
 function App () {
   const { userLog } = useUserData()
   const { favs } = useGetFavs({ logged: userLog.logged })
+
   return (
     <Grid container sx={styleProps}>
       <Router>
@@ -37,6 +40,8 @@ function App () {
           <Route exact path='/account' element={userLog.logged ? <Account /> : <Navigate to='/' />} />
           <Route exact path='/profile' element={userLog.logged ? <Profile /> : <Navigate to='/' />} />
           <Route exact path='/my-products' element={userLog.logged ? <MyProducts /> : <Navigate to='/' />} />
+          <Route exact path='/results/:word' element={<SearchResults />} />
+          <Route exact path='/messages' element={userLog.logged ? <Chat /> : <Navigate to='/' />} />
           <Route exact path='/favorites' element={userLog.logged ? <MyFavorites /> : <Navigate to='/' />} />
           <Route exact path='/upload' element={userLog.logged ? <UploadArticle /> : <Navigate to='/' />} />
           <Route exact path='/details/:id' element={userLog.logged ? <ArticleDetails /> : <Navigate to='/' />} />

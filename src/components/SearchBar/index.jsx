@@ -10,8 +10,10 @@ import {
   stylePropsInputRoot
 }
   from './styles'
+import { useNavigate } from 'react-router-dom'
 
 const SearchBar = () => {
+  const navigate = useNavigate()
   const [search, setSearch] = useState(null)
 
   const onHandleChange = (evt) => {
@@ -20,7 +22,7 @@ const SearchBar = () => {
 
   const onHandleSubmit = (evt) => {
     evt.preventDefault()
-    console.log(search)
+    return navigate(`/results/${search}`)
   }
 
   return (

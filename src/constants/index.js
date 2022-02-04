@@ -181,3 +181,7 @@ export const fetcherWithToken = (url, token) => fetch(url, {
 /* API URLS */
 export const SERVER_URL = 'http://localhost:3012'
 export const SERVER_URL_FASTAPI = 'http://127.0.0.1:8000'
+
+export const CHAT_ENGINE_SECRET = import.meta.env.VITE_CHAT_ENGINE_SECRET
+export const CHAT_ENGINE_PROJECTID = import.meta.env.VITE_CHAT_ENGINE_PROJECTID
+export const CHAT_ENGINE_USER = import.meta.env.VITE_CHAT_ENGINE_USERNAME

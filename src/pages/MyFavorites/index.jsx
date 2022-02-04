@@ -1,16 +1,12 @@
 import React, { useContext } from 'react'
 import { Grid, Typography } from '@mui/material'
 import PreviewCard from '../../components/PreviewCard'
-import { useUserArticles } from '../../hooks/useUserArticles'
 import { styleProps, stackStyles } from './styles'
-
 import { UserContext } from '../../context/UserContext'
 import LoadingSpinner from '../../components/LoadingSpinner'
-import { useNavigate } from 'react-router-dom'
 import { useGetFavs } from '../../hooks/useGetFavs'
 
 const MyFavorites = () => {
-  const navigate = useNavigate()
   const { userLog } = useContext(UserContext)
   const { favs } = useGetFavs({ logged: userLog.logged })
 
